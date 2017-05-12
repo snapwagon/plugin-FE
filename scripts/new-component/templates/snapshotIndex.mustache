@@ -1,0 +1,14 @@
+/* eslint-disable no-undef */
+
+import React from 'react';
+import renderer from 'react-test-renderer';
+
+import {{name}} from '../{{name}}.jsx';
+
+describe('<{{name}} /> snapshots', () => {
+  test('renders', () => {
+    const tree = renderer.create(<{{name}} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+

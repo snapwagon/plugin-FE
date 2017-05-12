@@ -1,0 +1,11 @@
+{
+  "presets": ["es2015", "react", "stage-2"],
+  "env": {
+    "production": {
+      "ignore": [
+        "__tests__",
+        "__stories__"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+dist/
+lib/
+assets/
+npm-debug.log
+yarn-error.log
+.DS_Store
+node_modules/
+kjsquared-FE
+*.tar.gz
+*.tgz
+bundle/
+.idea/
+jenkins/
+test_reports/
+yarn.lock
+.vscode/

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Cards /> snapshots rendered with props 1`] = `
+<div
+  className="coup-Cards coup-Cards--row"
+>
+  <div>
+    Hello?
+  </div>
+</div>
+`;
+
+exports[`<Cards /> snapshots rendered with required props 1`] = `
+<div
+  className="coup-Cards coup-Cards--row"
+>
+  <header
+    className="coup-Header coup-Cards__header"
+  >
+    Also Available:
+  </header>
+  <div>
+    Aye
+  </div>
+</div>
+`;

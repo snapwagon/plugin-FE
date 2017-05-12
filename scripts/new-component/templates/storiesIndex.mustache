@@ -1,0 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
+import React from 'react';
+import { storiesOf } from '@kadira/storybook';
+
+import {{name}} from '../{{name}}.jsx';
+
+storiesOf('{{name}}', module)
+  .add('renders the component', () => (
+    <{{name}} />
+  ));

@@ -1,0 +1,60 @@
+.coup-Cards {
+  display: flex;
+  flex-wrap: wrap;
+
+  &--column {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &--row {
+    justify-content: space-around;
+  }
+}
+
+.coup-Cards__footer {
+  box-sizing: border-box;
+  font-family: $cera;
+  color: $darkerGray;
+  font-weight: $regular;
+  border: 1px solid $lighterGrayNav;
+  padding: $xxsmall;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  margin-top: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.coup-Content--action {
+  border-radius: 0;
+  border-top-left-radius: 8px;
+  font-size: $milli;
+  font-weight: $med;
+  transform: translateY(45px);
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  text-transform: uppercase;
+  border: 0;
+  width: 100%;
+  margin-bottom: 0;
+
+  &:active {
+    background-color: #fff;
+    color: $blue;
+  }
+}
+
+.coup-Card--is-selected .coup-Content--action {
+  transform: translateY(0px);
+  text-decoration: none;
+}
+
+.coup-Card__content--left {
+  justify-content: center;
+  flex: 1 0 0;
+}
+
+.coup-Card__content--right {
+  flex: 2 0 0;
+}

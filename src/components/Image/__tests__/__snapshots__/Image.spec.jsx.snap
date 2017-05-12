@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Image /> snapshots rendered with all props 1`] = `
+<img
+  alt="Pork & Cabbage Tacos"
+  className="coup-Image my-Image"
+  src="/image.png"
+  width="80%"
+/>
+`;
+
+exports[`<Image /> snapshots rendered with required props 1`] = `
+<img
+  alt="Pork & Cabbage Tacos"
+  className="coup-Image"
+  src="/image.png"
+  width="100%"
+/>
+`;

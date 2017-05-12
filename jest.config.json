@@ -1,0 +1,26 @@
+{
+  "verbose": true,
+  "rootDir": "",
+  "roots": [
+    "__mock__",
+    "src"
+  ],
+  "testResultsProcessor": "./node_modules/jest-junit",
+  "coverageDirectory": "test_reports/coverage",
+  "collectCoverage": true,
+  "collectCoverageFrom": ["**/*.{js,jsx}"],
+  "coverageReporters": ["lcov", "cobertura"],
+  "coveragePathIgnorePatterns": ["__mock__", "/__stories__/", "/__tests__/", "src/index.js"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 95,
+      "functions": 95,
+      "lines": 95,
+      "statements": 95
+    }
+  },
+  "moduleNameMapper": {
+    "\\.(jpg|png)$": "<rootDir>/utils/image-mock.js"
+  },
+  "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"]
+}
