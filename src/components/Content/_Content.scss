@@ -19,12 +19,12 @@
   font-size: 1em;
   font-weight: bold;
   color: $blue;
-  font-family: $cera;
+  font-family: $lato;
   line-height: 22px;
 }
 
 .coup-Content__subtitle {
-  font-family: $cera;
+  font-family: $lato;
   font-size: 0.875em;
   color: $gray;
 }
@@ -55,7 +55,7 @@
   border-radius: 4px;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
   transition: box-shadow 0.3s ease-in-out;
-  font-family: $cera;
+  font-family: $lato;
   background-color: $white;
 
   &--landscape {

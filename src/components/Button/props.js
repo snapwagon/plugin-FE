@@ -11,6 +11,7 @@ const {
 
 export default {
   isDisabled: bool,
+  isLoading: bool,
   classNames: oneOfType([
     string,
     objectOf(bool)

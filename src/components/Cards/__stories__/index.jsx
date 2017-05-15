@@ -49,7 +49,7 @@ storiesOf('Cards', module).addDecorator((story) => (
 )).addWithInfo('rendered as a row of <Card />', () => (
   <Cards>
     <Section type="Header">
-      <Image src={lifestyleImage}/>
+      <Image src={lifestyleImage} alt="Jump into Spring!"/>
     </Section>
     <Section type="Body">
       <Content title="ONLY $17.00" subtitle="Jump into June!" tagline="DISCOUNT: 34%"/>

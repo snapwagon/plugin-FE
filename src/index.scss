@@ -1,6 +1,10 @@
 @import './styles/colors';
 @import './styles/mixins';
 @import './styles/typography';
+@import './styles/semantic/container';
+@import './styles/semantic/forms';
+@import './styles/semantic/modal';
+@import './styles/semantic/progress';
 
 @import './components/Input/Input';
 @import './components/Button/Button';
