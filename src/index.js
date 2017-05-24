@@ -5,4 +5,5 @@ export { default as Image } from './components/Image/Image';
 export { default as Content } from './components/Content/Content';
 export { default as CTAContainer } from './containers/CTAContainer/CTAContainer';
 export { default as BaseContainer } from './containers/BaseContainer/BaseContainer';
-export { default as AccountInfoContainer } from './components/AccountInfoContainer/AccountInfoContainer';
+export { default as AccountInfoContainer } from './containers/AccountInfoContainer/AccountInfoContainer';
+export { default as PaymentContainer } from './containers/PaymentContainer/PaymentContainer';

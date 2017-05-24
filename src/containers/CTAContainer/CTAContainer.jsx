@@ -15,7 +15,6 @@ export default class CTAContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    
   }
 
   render() {

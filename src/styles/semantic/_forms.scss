@@ -5,7 +5,47 @@
 .ui.form {
   position: relative;
   max-width: 100%;
+  font-family: $lato;
 }
+
+.coup-form {
+  margin: 8px;
+}
+
+.coup-subtitle + .coup-subtitle {
+  margin-left: 10px;
+}
+
+.coup-form-flex-group {
+  display: flex;
+  flex: 1 0 100%;
+  justify-content: space-between;
+}
+
+.coup-input-third {
+  flex: 1 0 33%;
+}
+
+.coup-main-text {
+  font-weight: $regular;
+  margin: 5px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coup-subtitle {
+  font-size: 12px;
+}
+
+.coup-field-description {
+  text-align: center;
+}
+
+.coup-field-left {
+  text-align: left;
+}
+
+
 
 /*--------------------
         Content

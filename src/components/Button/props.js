@@ -32,5 +32,5 @@ export const defaultProps = {
   isDisabled: false,
   onClick() {},
   text: 'View Offer',
-  type: 'medium'
+  type: 'small'
 };

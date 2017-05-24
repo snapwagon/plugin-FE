@@ -13,4 +13,4 @@ bundle/
 jenkins/
 test_reports/
 yarn.lock
-.vscode/
+env.config

@@ -5,6 +5,7 @@ import { Modal, Progress } from 'semantic-ui-react';
 
 import CallToAction from '../CTAContainer/CTAContainer';
 import AccountInfo from '../AccountInfoContainer/AccountInfoContainer';
+import PaymentForm from '../PaymentContainer/PaymentContainer';
 
 class BaseContainer extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class BaseContainer extends React.Component {
   }
 
   handleContinue(e) {
+    debugger;
     this.setState({
       step: this.state.step+=1
     });
@@ -42,9 +44,9 @@ class BaseContainer extends React.Component {
 
     const stepsMap = {
       1: (<CallToAction handleContinue={this.handleContinue}/>),
-      2: (<AccountInfo/>),
-      // 3: (<PaymentForm />),
-      // 4: (<Success />)
+      2: (<AccountInfo handleContinue={this.handleContinue}/>),
+      3: (<PaymentForm handleContinue={this.handleContinue}/>),
+      4: (<div />)
     }
     return stepsMap[this.state.step];
 
