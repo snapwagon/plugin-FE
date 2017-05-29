@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Form, Input, Select } from 'semantic-ui-react';
 
+import { analytics } from '../../utils/utils';
+
 import Button from '../../components/Button/Button';
 
 class AccountInfoContainer extends React.Component {
@@ -10,12 +12,7 @@ class AccountInfoContainer extends React.Component {
     super(props);
 
     this.state = {
-      totalValue: (props.offerAmount * 1),
-      quantity: 1,
-      message: "",
-      name: "",
-      email: "",
-      phone: ""
+      message: ""
     };
 
     this.handleSelect = this.handleSelect.bind(this);
@@ -24,26 +21,23 @@ class AccountInfoContainer extends React.Component {
   }
 
   handleSelect(e) {
-    this.setState({
-      ...this.state,
-      quantity: e.target.value,
-      totalValue: this.props.offerAmount * e.target.value
-    });
+    return this.props.handleSelect(e);
   }
 
   handleInputChange(event) {
-     const target = event.target;
-     const value = target.value;
-     const name = target.name;
-
-     this.setState({
-       ...this.state,
-       [name]: value
-     });
+     return this.props.handleInputChange(event);
    }
 
   handleValidate(e) {
-    if (this.state.name && this.state.email) {
+    if (this.props.name && this.props.email) {
+      analytics.identify({
+        first_name: this.props.name,
+        last_name: this.props.name,
+        email: this.props.email
+      });
+      analytics.track('Product Added', {
+        offerId: this.props.offerId
+      });
       return this.props.handleContinue()
     }
   }
@@ -58,37 +52,39 @@ class AccountInfoContainer extends React.Component {
     />);
 
     return (
-      <Form size="tiny" className="coup-form">
+      <Form size="mini" className="coup-form">
         {message}
-        <Form.Group className="coup-form-flex-group">
-          <Form.Field id='form-input-control-description' width="5" className="coup-field-descriptiion">
+        <Form.Group className="coup-form-flex-group coup-form-flex-group-info">
+          <Form.Field id='form-input-control-description' className="coup-field-descriptiion">
             <label>Description</label>
             <p className="coup-main-text">{this.props.offerTitle}</p>
             <span className="coup-subtitle">Discount: {this.props.offerDiscount}%</span>
             <span className="coup-subtitle">Value: ${this.props.offerFullValue}</span>
           </Form.Field>
-          <Form.Field label='Qty' control='select' name={this.state.quantity} onChange={this.handleSelect} width="1" className="coup-field-center">
+
+          <Form.Select control={Select} label='Qty' control='select' name={this.props.quantity} onChange={this.handleSelect} className="coup-field-center coup-quantity">
             <option value='1'>1</option>
             <option value='2'>2</option>
             <option value='3'>3</option>
             <option value='4'>4</option>
             <option value='5'>5</option>
-          </Form.Field>
-          <Form.Field id='form-input-control-offer-amount' className="field-center" width="2">
-            <label>Offer Amount</label>
+          </Form.Select>
+          <Form.Field id='form-input-control-offer-amount' className="">
+            <label>Offer $</label>
             <p className="coup-main-text">${this.props.offerAmount}</p>
           </Form.Field>
-          <Form.Field id='form-input-control-total' className="field-center" width="2">
-            <label>Total Amount</label>
-            <p className="coup-main-text">${this.state.totalValue}</p>
+          <Form.Field id='form-input-control-total' className="">
+            <label>Total $</label>
+            <p className="coup-main-text">${this.props.totalAmount}</p>
           </Form.Field>
+          </Form.Group>
+
+        <Form.Group className="coup-form-flex-group">
+          <Form.Input id='form-input-control-full-name' label='Name' placeholder='Name' name="name" value={this.props.name} className="coup-input-third" onChange={this.handleInputChange} required />
+          <Form.Input id='form-input-control-email' label='Email' type="email" value={this.props.email} name="email" placeholder='awesomemom@gmail.com' className="coup-input-third" onChange={this.handleInputChange} required/>
+          <Form.Input id='form-input-control-phone' type='tel' label='Phone' placeholder='Phone' className="coup-input-third" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
         </Form.Group>
-        <Form.Group className="coup-form-flex-group" widths="equal">
-          <Form.Field id='form-input-control-full-name' control={Input} label='Name' placeholder='Name' name="name" value={this.state.name} className="coup-input-third" onChange={this.handleInputChange} required/>
-          <Form.Field  control={Input} id='form-input-control-email' label='Email' value={this.state.email} name="email" placeholder='awesomemom@gmail.com' className="coup-input-third" onChange={this.handleInputChange} required/>
-          <Form.Input id='form-input-control-phone' type='tel' label='Phone' placeholder='Phone' className="coup-input-third" name="phone" onChange={this.handleInputChange} value={this.state.phone} />
-        </Form.Group>
-        <Form.Button id='form-button-control-public' content='Confirm' control={Button} onClick={this.handleValidate}/>
+        <Form.Button id='form-button-control-public' content='Confirm' control={Button} text="Continue" onClick={this.handleValidate}/>
       </Form>
     );
   };
@@ -104,6 +100,7 @@ AccountInfoContainer.propTypes = {
   offerAmount: number,
   offerDiscount: number,
   offerFullValue: number,
+  totalAmount: number
 };
 
 AccountInfoContainer.defaultProps = {

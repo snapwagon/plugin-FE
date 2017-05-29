@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import braintree from 'braintree-web-drop-in';
-import { fetchToken, sendNonce } from '../../utils/utils';
+import { postPayment, analytics } from '../../utils/utils';
 
 import { Form, Input, Select } from 'semantic-ui-react';
 
@@ -17,11 +17,22 @@ class PaymentContainer extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
+    this.handleReturn = this.handleReturn.bind(this);
+  }
+
+  compoentWillUnmount() {
+    // hostedFieldsInstance.teardown(function (err) {
+    //   if (err) {
+    //     console.error('Could not tear down Hosted Fields!');
+    //   } else {
+    //     console.log('Hosted Fields has been torn down!');
+    //   }
+    // });
   }
 
   componentDidMount() {
     braintree.create({
-      authorization: 'sandbox_4phrwktw_jgywsy8jmpmjgvkd',
+      authorization: this.props.clientToken,
       selector: '#dropin-container'
     }, (createErr, instance) => {
       if (createErr) {
@@ -48,6 +59,22 @@ class PaymentContainer extends React.Component {
    }
 
   handleValidate(e) {
+    let formData = {
+      "sale": {
+        "payment_method_nonce": ""
+      },
+      "customer": {
+        "first_name": this.props.name,
+        "last_name": this.props.name,
+        "email": this.props.email,
+        "phone_number": this.props.phone
+      },
+      "offer": {
+        "id": this.props.offerId
+      },
+      "quantity": this.props.quantity
+    };
+    const continueCB = this.props.handleContinue;
     this.state.instance && this.state.instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
       if (requestPaymentMethodErr) {
         // No payment method is available.
@@ -55,22 +82,49 @@ class PaymentContainer extends React.Component {
         console.error(requestPaymentMethodErr);
         return;
       }
+      formData.sale.payment_method_nonce = payload.nonce;
+
+      analytics.track('Checkout Started', {
+        offerId: this.props.offerId,
+        quantity: this.props.quantity
+      });
       // Submit payload.nonce to your server
-      sendNonce(payload)
-      return (() => this.props.handleContinue());
+      postPayment(formData)
+        .then(() => {
+          analytics.track('Order Completed', {
+            offerId: this.props.offerId,
+            quantity: this.props.quantity
+          });
+          return continueCB();
+        })
+        .catch((error) => {
+          // this.handleError(error);
+          console.warn(error);
+        });
     });
   }
 
+  handleReturn(e) {
+    return this.props.handleStepBack();
+  }
+
   render() {
+
     return (
       <div>
         <div id="dropin-container"></div>
         <Button
+          id="back-button"
+          text="Back"
+          size="small"
+          onClick={this.handleReturn}
+        />
+        <Button
           id="submit-button"
           text="Purchase"
+          size="small"
           onClick={this.handleValidate}
-        >
-      </Button>
+        />
       </div>
     );
   };
@@ -78,10 +132,13 @@ class PaymentContainer extends React.Component {
 
 const {
   string,
-  number
+  number,
+  func
 } = PropTypes;
 
 PaymentContainer.propTypes = {
+  handleStepBack() {},
+  handleContinue() {},
   offerTitle: string,
   offerAmount: number,
   offerDiscount: number,

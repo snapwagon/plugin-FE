@@ -12,25 +12,38 @@ const {
 export default {
   isDisabled: bool,
   isLoading: bool,
+  color: oneOf([
+    'blue',
+    'orange',
+    'red',
+    'white'
+  ]),
   classNames: oneOfType([
     string,
     objectOf(bool)
   ]),
   onClick: func,
   text: string,
-  type: oneOf([
+  size: oneOf([
     'card',
     'small',
     'medium',
     'large',
     'full'
+  ]),
+  type: oneOf([
+    'normal',
+    'outline'
   ])
 };
 
 export const defaultProps = {
+  color: 'blue',
   classNames: undefined,
   isDisabled: false,
+  isLoading: false,
   onClick() {},
+  size: 'small',
   text: 'View Offer',
-  type: 'small'
+  type: 'normal'
 };

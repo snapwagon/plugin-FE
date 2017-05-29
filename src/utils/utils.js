@@ -1,17 +1,36 @@
 import fetch from 'isomorphic-fetch';
 
+import Segment from 'load-segment';
+
 const parseResponse = (response) => {
   if (response.ok) return response.json();
   throw new Error(response.statusText);
 };
 
-export const fetchToken = () => {
+export const analytics = () => {
+  return Segment({key: 'kfLYgloGKOIzTjzdQtb3bsMQ5LeOrraY'});
+}
 
-};
+export const getOffer = (offerId) => {
+  return fetch(`http://8c1fb8b3.ngrok.io/api/offer/${offerId}/`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(parseResponse);
+}
 
-export const sendNonce = () => {
-  
-};
+export const getToken = () => {
+  return fetch(`http://8c1fb8b3.ngrok.io/api/client_token/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(parseResponse);
+}
 
 export const getPackages = () => {
   return fetch('/api/users/packages?filter[arrival]=upcoming', {
@@ -58,25 +77,13 @@ export const getOrder = (orderId, productType) => {
     });
 };
 
-export const updateOrder = (orderId, products, productType) => {
-  return fetch(`/api/users/orders/${orderId}/relationships/products`, {
-    method: 'PATCH',
-    credentials: 'include',
+export const postPayment = (data) => {
+  return fetch(`http://8c1fb8b3.ngrok.io/api/order/`, {
+    method: 'POST',
     headers: {
-      Accept: 'application/vnd.api+json',
-      'Content-Type': 'application/vnd.api+json'
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      data: {
-        type: 'order',
-        id: orderId,
-        relationships: {
-          products: {
-            data: products.map((product) => ({ id: product.id, type: productType }))
-          }
-        }
-      }
-    }),
+    body: JSON.stringify(data),
   })
     .then((response) => {
       if (response.ok) return response.json();

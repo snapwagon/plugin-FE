@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container } from 'semantic-ui-react';
+import { analytics } from '../../utils/utils';
 
 import Cards from '../../components/Cards/Cards';
 import Image from '../../components/Image/Image';
@@ -11,31 +11,26 @@ import Button from '../../components/Button/Button';
 
 import lifestyleImage from 'images/jump.jpg';
 
-export default class CTAContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
-    return (
-      <Container fluid>
-        <Cards>
-          <Section type="Header">
-            <Image src={lifestyleImage} alt="Jump into Spring!"/>
-          </Section>
-          <Section type="Body">
-            <Content title="ONLY $17.00" subtitle="Jump into June!" tagline="DISCOUNT: 34%"/>
-            <Button
-              onClick={this.props.handleContinue}
-              type="medium"
-              customStyle={{ color:"white", background: "#155885" }}
-            />
-          </Section>
-        </Cards>
-      </Container>
-    )
-  }
+const CTAContainer = (props) => {
+  analytics.track('Product Viewed', {
+    offerId: this.props.offerId
+  })
+  const detailLine = `Discount: ${props.offerDiscount}% Value: $${props.offerFullValue}`;
+  return (
+    <Cards>
+      <Section type="Header">
+        <Image src={lifestyleImage} alt={props.offerTitle}/>
+      </Section>
+      <Section type="Body">
+        <Content title={props.offerTitle} subtitle={`ONLY $${props.offerAmount}`} tagline={detailLine}/>
+        <Button
+          onClick={props.handleContinue}
+          size="small"
+          style={{ color:"white", background: "#155885" }}
+        />
+      </Section>
+    </Cards>
+  )
 }
 
 const {
@@ -45,9 +40,19 @@ const {
 } = PropTypes;
 
 CTAContainer.propTypes = {
-  handleContinue () {}
+  handleContinue: func,
+  offerTitle: string,
+  offerAmount: number,
+  offerDiscount: number,
+  offerFullValue: number
 };
 
 CTAContainer.defaultProps = {
-  step: 1
+  handleContinue() {},
+  offerTitle: "MEGA ALL-ACCESS PASS",
+  offerAmount: 17,
+  offerDiscount: 35,
+  offerFullValue: 24
 };
+
+export default CTAContainer;

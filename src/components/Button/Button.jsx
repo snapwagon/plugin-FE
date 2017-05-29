@@ -29,7 +29,7 @@ const Button = (props) => {
             `coup-Button--${props.size}--loading`,
           )}
         >
-
+          
         </div>
       )}
     </button>
