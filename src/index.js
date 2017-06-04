@@ -7,3 +7,4 @@ export { default as CTAContainer } from './containers/CTAContainer/CTAContainer'
 export { default as BaseContainer } from './containers/BaseContainer/BaseContainer';
 export { default as AccountInfoContainer } from './containers/AccountInfoContainer/AccountInfoContainer';
 export { default as PaymentContainer } from './containers/PaymentContainer/PaymentContainer';
+export { default as Confirmation } from './components/Confirmation/Confirmation';

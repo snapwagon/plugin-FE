@@ -19,6 +19,12 @@
   text-transform: uppercase;
 }
 
+.coup-Button--fixed {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+}
+
 .coup-Button--is-disabled {
   cursor: initial;
 }

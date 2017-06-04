@@ -74,10 +74,10 @@ class AccountInfoContainer extends React.Component {
             <p className="coup-main-text">${this.props.offerAmount}</p>
           </Form.Field>
           <Form.Field id='form-input-control-total' className="">
-            <label>Total $</label>
+            <label>Total</label>
             <p className="coup-main-text">${this.props.totalAmount}</p>
           </Form.Field>
-          </Form.Group>
+        </Form.Group>
 
         <Form.Group className="coup-form-flex-group">
           <Form.Input id='form-input-control-full-name' label='Name' placeholder='Name' name="name" value={this.props.name} className="coup-input-third" onChange={this.handleInputChange} required />
@@ -92,18 +92,23 @@ class AccountInfoContainer extends React.Component {
 
 const {
   string,
-  number
+  number,
+  func
 } = PropTypes;
 
 AccountInfoContainer.propTypes = {
+  handleContinue: func,
+  handleInputChange: func,
   offerTitle: string,
-  offerAmount: number,
-  offerDiscount: number,
-  offerFullValue: number,
-  totalAmount: number
+  offerAmount: string,
+  offerDiscount: string,
+  offerFullValue: string,
+  totalAmount: string
 };
 
 AccountInfoContainer.defaultProps = {
+  handleContinue() {},
+  handleInputChange() {},
   offerTitle: "MEGA ALL-ACCESS PASS",
   offerAmount: 17,
   offerDiscount: 35,

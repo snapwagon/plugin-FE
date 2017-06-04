@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { analytics } from '../../utils/utils';
-
 import Cards from '../../components/Cards/Cards';
 import Image from '../../components/Image/Image';
 import Content from '../../components/Content/Content';
@@ -12,10 +10,8 @@ import Button from '../../components/Button/Button';
 import lifestyleImage from 'images/jump.jpg';
 
 const CTAContainer = (props) => {
-  analytics.track('Product Viewed', {
-    offerId: this.props.offerId
-  })
   const detailLine = `Discount: ${props.offerDiscount}% Value: $${props.offerFullValue}`;
+
   return (
     <Cards>
       <Section type="Header">
@@ -42,17 +38,18 @@ const {
 CTAContainer.propTypes = {
   handleContinue: func,
   offerTitle: string,
-  offerAmount: number,
-  offerDiscount: number,
-  offerFullValue: number
+  offerAmount: string,
+  offerDiscount: string,
+  offerFullValue: string,
+  finePrint: string
 };
 
 CTAContainer.defaultProps = {
   handleContinue() {},
   offerTitle: "MEGA ALL-ACCESS PASS",
-  offerAmount: 17,
-  offerDiscount: 35,
-  offerFullValue: 24
+  offerAmount: '17',
+  offerDiscount: '35',
+  offerFullValue: '24'
 };
 
 export default CTAContainer;

@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, Progress, Container } from 'semantic-ui-react';
+import { Modal, Progress, Container, Icon } from 'semantic-ui-react';
 
-import { getOffer, getToken } from '../../utils/utils';
+import { getOffer, getToken, analytics } from '../../utils/utils';
 
 import CallToAction from '../CTAContainer/CTAContainer';
 import AccountInfo from '../AccountInfoContainer/AccountInfoContainer';
 import PaymentForm from '../PaymentContainer/PaymentContainer';
+import Button from '../../components/Button/Button';
+import Confirmation from '../../components/Confirmation/Confirmation';
 
 class BaseContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      hidden: false,
       clientId: 0,
       offer: {},
       step: 1,
@@ -31,9 +34,14 @@ class BaseContainer extends React.Component {
     this.handleStepBack = this.handleStepBack.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
+    this.handleClose = this.handleClose.bind(this);
 
-  componentDidMount() {
+    analytics.page();
+    analytics.track('Product Viewed', {
+      offerId: this.state.offer.id,
+      clientId: this.state.clientId
+    });
+
     getToken()
       .then((data) => {
         this.setState({
@@ -43,22 +51,38 @@ class BaseContainer extends React.Component {
       })
       .catch(console.warn);
 
-    getOffer('8e2002c6-ab9f-48a5-bf2b-bb25d37e1d42')
+    getOffer('d6fa53ad-b2ad-475c-a492-45ab0d6fedf6')
       .then((data) => {
         console.log('offer Fetched', data);
         this.setState({
           ...this.state,
-          offer: data
+          offer: data,
+          totalAmount: data.discounted_value * 1
         });
       })
       .catch(console.warn);
   }
 
+  componentDidMount() {
+
+  }
+
   handleContinue(e) {
-    this.setState({
-      ...this.state,
-      step: this.state.step+1
-    });
+    if (this.state.step < 4){
+      this.setState({
+        ...this.state,
+        step: this.state.step + 1
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        hidden: true
+      });
+      this.setState({
+        ...this.state,
+        step: 1
+      });
+    }
     // make the request for braintree token,
     // plus fire the event for analytics
     // send attribution data.
@@ -75,7 +99,7 @@ class BaseContainer extends React.Component {
     this.setState({
       ...this.state,
       quantity: e.target.value,
-      totalAmount: this.state.offerAmount * e.target.value
+      totalAmount: this.state.offer.discounted_value * e.target.value
     });
   }
 
@@ -88,14 +112,24 @@ class BaseContainer extends React.Component {
       ...this.state,
       [name]: value
     });
-   }
+  }
 
-  renderModal() {
+  handleClose(event) {
+    this.setState({
+      ...this.state,
+      hidden: true
+    })
+  }
+
+  renderContent() {
     const stepsMap = {
       1: (<CallToAction
             handleContinue={this.handleContinue}
             offerTitle={this.state.offer.title}
-            offerAmount={this.state.offer.value}
+            offerAmount={this.state.offer.discounted_value}
+            offerDiscount={this.state.offer.discount_percentage}
+            offerFullValue={this.state.offer.value}
+            finePrint={this.state.offer.fine_print}
             offerId={this.state.offer.id}
           />),
       2: (<AccountInfo
@@ -106,9 +140,9 @@ class BaseContainer extends React.Component {
             quantity={this.state.quantity}
             phone={this.state.phone}
             offerTitle={this.state.offer.title}
-            offerAmount={this.state.offer.value}
-            offerDiscount={this.state.offer.discountPercentage}
-            offerFullValue={this.state.offer.fullValue}
+            offerAmount={this.state.offer.discounted_value}
+            offerDiscount={this.state.offer.discount_percentage}
+            offerFullValue={this.state.offer.value}
             totalAmount={this.state.totalAmount}
             handleInputChange={this.handleInputChange}
             handleSelect={this.handleSelect}
@@ -122,27 +156,46 @@ class BaseContainer extends React.Component {
             name={this.state.name}
             email={this.state.email}
             phone={this.state.phone}
-            offerId='8e2002c6-ab9f-48a5-bf2b-bb25d37e1d42'
+            offerId={this.state.offer.id}
           /> ),
-      4: (<div> horray</div>)
+      4: (<Confirmation
+            handleContinue={this.handleContinue}
+          />)
     }
     return stepsMap[this.state.step];
 
   }
 
-  render() {
-    const progress = (this.state.step / 4) * 100;
+  renderModal() {
+    if (this.state.hidden) {
+      return (
+        <Button
+          size="small"
+          color="orange"
+          type="normal"
+          classNames="coup-Button--fixed"
+          text="View Exclusive Offers"
+          onClick={() => {
+            return this.setState({
+              ...this.state,
+              hidden:false
+            })
+          }}
+        />
+      )
+    }
 
-    const renderedElement = this.renderModal();
+    const renderedContent = this.renderContent();
+    const progress = (this.state.step / 4) * 100;
 
     return (
       <Modal
-        defaultOpen={true}
-        open={this.state.modalOpen}
+        open={!this.state.hidden}
         onClose={this.handleClose}
+
         size="small"
-        dimmer="blurring"
-        closeIcon={true}
+        dimmer="true"
+        closeIcon="close"
       >
         <Progress
           percent={progress}
@@ -151,9 +204,17 @@ class BaseContainer extends React.Component {
           >
         </Progress>
         <Container fluid>
-          {renderedElement}
+          {renderedContent}
         </Container>
       </Modal>
+    )
+  }
+
+  render() {
+    const renderedModal = this.renderModal();
+
+    return (
+      renderedModal
     );
   }
 }

@@ -5,6 +5,7 @@
   font-size: $medium;
   overflow: hidden;
   max-width: 277px;
+  font-family: $lato;
 }
 
 .coup-Content__text {
@@ -19,12 +20,10 @@
   font-size: 1em;
   font-weight: bold;
   color: $blue;
-  font-family: $lato;
   line-height: 22px;
 }
 
 .coup-Content__subtitle {
-  font-family: $lato;
   font-size: 0.875em;
   color: $gray;
 }

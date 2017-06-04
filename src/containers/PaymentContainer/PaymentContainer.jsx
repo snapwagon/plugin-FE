@@ -85,15 +85,15 @@ class PaymentContainer extends React.Component {
       formData.sale.payment_method_nonce = payload.nonce;
 
       analytics.track('Checkout Started', {
-        offerId: this.props.offerId,
-        quantity: this.props.quantity
+        offerId: formData.offer.id,
+        quantity: formData.quantity
       });
       // Submit payload.nonce to your server
       postPayment(formData)
         .then(() => {
           analytics.track('Order Completed', {
-            offerId: this.props.offerId,
-            quantity: this.props.quantity
+            offerId: formData.offer.id,
+            quantity: formData.quantity
           });
           return continueCB();
         })
