@@ -94,7 +94,7 @@
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
   color: rgba(0, 0, 0, 0.87);
-  border-radius: 0.28571429rem;
+  border-radius: 0;
   box-shadow: 0em 0em 0em 0em transparent inset;
   -webkit-transition: color 0.1s ease, border-color 0.1s ease;
   transition: color 0.1s ease, border-color 0.1s ease;
@@ -110,7 +110,7 @@
   border: 1px solid rgba(34, 36, 38, 0.15);
   outline: none;
   color: rgba(0, 0, 0, 0.87);
-  border-radius: 0.28571429rem;
+  border-radius: 0;
   box-shadow: 0em 0em 0em 0em transparent inset;
   -webkit-transition: color 0.1s ease, border-color 0.1s ease;
   transition: color 0.1s ease, border-color 0.1s ease;
@@ -146,7 +146,7 @@
   width: 100%;
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  border-radius: 0.28571429rem;
+  border-radius: 0;
   box-shadow: 0em 0em 0em 0em transparent inset;
   padding: 0.62em 1em;
   color: rgba(0, 0, 0, 0.87);
@@ -349,14 +349,14 @@
 .ui.form input[type="url"]:focus {
   color: rgba(0, 0, 0, 0.95);
   border-color: #85B7D9;
-  border-radius: 0.28571429rem;
+  border-radius: 0;
   background: #FFFFFF;
   box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
 }
 .ui.form textarea:focus {
   color: rgba(0, 0, 0, 0.95);
   border-color: #85B7D9;
-  border-radius: 0.28571429rem;
+  border-radius: 0;
   background: #FFFFFF;
   box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
   -webkit-appearance: none;
@@ -921,7 +921,7 @@
 /*-----------------------
       Custom
 -------------------------*/
-#dropin-container {
+.dropin-container {
   min-height: 258px;
 }
 

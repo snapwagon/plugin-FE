@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import braintree from 'braintree-web-drop-in';
 import { postPayment, analytics } from '../../utils/utils';
+import cx from 'classnames';
 
 import { Form, Input, Select } from 'semantic-ui-react';
 
@@ -12,10 +13,11 @@ class PaymentContainer extends React.Component {
     super(props);
 
     this.state = {
-      instance: undefined
+      instance: undefined,
+      isLoading: true,
+      isComplete: false
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
   }
@@ -39,43 +41,38 @@ class PaymentContainer extends React.Component {
        // An error in the create call is likely due to
        // incorrect configuration values or network issues.
        // An appropriate error will be shown in the UI.
-       console.error(createErr);
-       return;
-     } else {
-       this.setState({
-         instance: instance
-       });
-     }
+        console.error(createErr);
+      } else {
+        this.setState({
+          instance,
+          isLoading: false
+        });
+      }
     });
   }
 
-  handleInputChange(event) {
-     const target = event.target;
-     const name = target.name;
-
-     this.setState({
-       [name]: value
-     });
-   }
-
   handleValidate(e) {
-    let formData = {
-      "sale": {
-        "payment_method_nonce": ""
+    if (this.state.isComplete) return this.props.handleContinue();
+
+    const formData = {
+      sale: {
+        payment_method_nonce: ''
       },
-      "customer": {
-        "first_name": this.props.name,
-        "last_name": this.props.name,
-        "email": this.props.email,
-        "phone_number": this.props.phone
+      customer: {
+        first_name: this.props.name,
+        last_name: this.props.name,
+        email: this.props.email,
+        phone_number: this.props.phone
       },
-      "offer": {
-        "id": this.props.offerId
+      offer: {
+        id: this.props.offerId
       },
-      "quantity": this.props.quantity
+      quantity: this.props.quantity
     };
-    const continueCB = this.props.handleContinue;
-    this.state.instance && this.state.instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+
+    const handleComplete = () => this.setState({'isComplete': true});
+    // const continueCB = this.props.handleContinue;
+    return this.state.instance && this.state.instance.requestPaymentMethod((requestPaymentMethodErr, payload) => {
       if (requestPaymentMethodErr) {
         // No payment method is available.
         // An appropriate error will be shown in the UI.
@@ -95,7 +92,8 @@ class PaymentContainer extends React.Component {
             offerId: formData.offer.id,
             quantity: formData.quantity
           });
-          return continueCB();
+
+          return handleComplete();
         })
         .catch((error) => {
           // this.handleError(error);
@@ -109,25 +107,26 @@ class PaymentContainer extends React.Component {
   }
 
   render() {
-
     return (
-      <div>
-        <div id="dropin-container"></div>
-        <Button
-          id="back-button"
-          text="Back"
-          size="small"
-          onClick={this.handleReturn}
-        />
-        <Button
-          id="submit-button"
-          text="Purchase"
-          size="small"
-          onClick={this.handleValidate}
-        />
-      </div>
+        <div>
+          <div id="dropin-container" className={cx('dropin-container', {
+            "dropin-container--hidden": this.state.isLoading
+          })}/>
+          <Button
+            id="back-button"
+            text="Back"
+            size="small"
+            onClick={this.handleReturn}
+          />
+          <Button
+            id="submit-button"
+            text="Purchase"
+            size="small"
+            onClick={this.handleValidate}
+          />
+        </div>
     );
-  };
+  }
 }
 
 const {
@@ -146,7 +145,7 @@ PaymentContainer.propTypes = {
 };
 
 PaymentContainer.defaultProps = {
-  offerTitle: "MEGA ALL-ACCESS PASS",
+  offerTitle: 'MEGA ALL-ACCESS PASS',
   offerAmount: 17
 };
 

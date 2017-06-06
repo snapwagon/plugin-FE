@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entry = path.join(__dirname, 'src');
 const output = path.join(__dirname, 'dist');
@@ -18,6 +19,11 @@ if (process.env.MINIFY) {
       NODE_ENV: JSON.stringify('production'),
     },
   }));
+
+  plugins.push(new HtmlWebpackPlugin({
+    title: 'My App',
+    filename: 'assets/test.html'
+  }));
 }
 
 module.exports = {
@@ -31,14 +37,18 @@ module.exports = {
     library: 'recoop',
   },
   externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
+    // react: 'React',
+    // 'react-dom': 'ReactDOM',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   module: {
     loaders: [
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+      },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',

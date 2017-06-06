@@ -18,7 +18,7 @@ const Confirmation = (props) => {
       />
     </div>
   );
-}
+};
 
 const {
   number,
@@ -34,8 +34,8 @@ Confirmation.propTypes = {
 
 Confirmation.defaultProps = {
   handleContinue() {},
-  confirmationHeader: "YOU ROCK!",
-  confirmationMessage: "Check your email for your voucher and redeem in store."
+  confirmationHeader: 'YOU ROCK!',
+  confirmationMessage: 'Check your email for your voucher and redeem in store.'
 };
 
 export default Confirmation;

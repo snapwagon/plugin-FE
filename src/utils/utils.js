@@ -1,10 +1,10 @@
 import fetch from 'isomorphic-fetch';
-import serialize from 'serialize-javascript'
+import serialize from 'serialize-javascript';
 
 import Segment from 'load-segment';
 
 const parseResponse = (response) => {
-  if (response.ok) return serialize(response, {isJSON: true});
+  if (response.ok) return response.json();
   throw new Error(response.statusText);
 };
 
@@ -19,20 +19,20 @@ export const getOffer = (offerId) => {
     },
   })
   .then(parseResponse);
-}
+};
 
 export const getToken = () => {
-  return fetch(`http://alacode.org/api/client_token/`, {
+  return fetch('http://alacode.org/api/client_token/', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     },
   })
   .then(parseResponse);
-}
+};
 
 export const postPayment = (data) => {
-  return fetch(`http://alacode.org/api/order/`, {
+  return fetch('http://alacode.org/api/order/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

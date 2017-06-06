@@ -17,7 +17,8 @@ storiesOf('Cards', module).addDecorator((story) => (
   <div style={{
     maxWidth: '300px',
     margin: '0 auto'
-  }}>
+  }}
+  >
     {story()}
   </div>
 )).addWithInfo('rendered as a column of <Cards />', () => {
@@ -26,14 +27,15 @@ storiesOf('Cards', module).addDecorator((story) => (
       <Section type="Header">
         <div style={{
           margin: '0 auto'
-        }}>
+        }}
+        >
           <svg width="80" height="150" viewBox="0 0 33 47" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24.153.976a28.237 28.237 0 0 0-3.535-.754l-.467 7.842h-7.76L11.925.222C10.72.402 9.542.654 8.392.98 7.91 5.999 9.522 18.407 0 24.336v16.389s5.781 6.2 16.274 6.2c10.49 0 16.27-6.598 16.27-6.598V24.336c-9.524-5.929-7.912-18.34-8.39-23.36" fill="#0F346C" fillRule="evenodd"/>
+            <path d="M24.153.976a28.237 28.237 0 0 0-3.535-.754l-.467 7.842h-7.76L11.925.222C10.72.402 9.542.654 8.392.98 7.91 5.999 9.522 18.407 0 24.336v16.389s5.781 6.2 16.274 6.2c10.49 0 16.27-6.598 16.27-6.598V24.336c-9.524-5.929-7.912-18.34-8.39-23.36" fill="#0F346C" fillRule="evenodd" />
           </svg>
         </div>
       </Section>
       <Section type="Body">
-        <Content title="Blue Apron" subtitle="Building a Better Food System"/>
+        <Content title="Blue Apron" subtitle="Building a Better Food System" />
       </Section>
     </Cards>
   );
@@ -43,20 +45,21 @@ storiesOf('Cards', module).addDecorator((story) => (
   <div style={{
     maxWidth: '800px',
     margin: '0 auto'
-  }}>
+  }}
+  >
     {story()}
   </div>
 )).addWithInfo('rendered as a row of <Card />', () => (
   <Cards>
     <Section type="Header">
-      <Image src={lifestyleImage} alt="Jump into Spring!"/>
+      <Image src={lifestyleImage} alt="Jump into Spring!" />
     </Section>
     <Section type="Body">
-      <Content title="ONLY $17.00" subtitle="Jump into June!" tagline="DISCOUNT: 34%"/>
+      <Content title="ONLY $17.00" subtitle="Jump into June!" tagline="DISCOUNT: 34%" />
       <Button
         onClick={action('onClick')}
         type="medium"
-        customStyle={{ color:"white", background: "#155885" }}
+        customStyle={{ color: 'white', background: '#155885' }}
       />
     </Section>
 

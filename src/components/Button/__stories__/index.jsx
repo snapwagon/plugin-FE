@@ -42,20 +42,23 @@ const Buttons = ({ itemStyle }) => (
 storiesOf('Button', module)
   .addWithInfo('a <Button />', () => <Button />)
   .addWithInfo('an orange <Button /> of all types', () => (
-    <Buttons itemStyle = {{
-      background: "#eee",
-      color: "#fff"
-    }} />
+    <Buttons itemStyle={{
+      background: '#eee',
+      color: '#fff'
+    }}
+    />
   ))
   .addWithInfo('a blue <Button /> of all types', () => (
-    <Buttons itemStyle = {{
-      background: "blue",
-      color: "#fff"
-    }} />
+    <Buttons itemStyle={{
+      background: 'blue',
+      color: '#fff'
+    }}
+    />
   ))
   .addWithInfo('a white <Button /> of all types', () => (
-    <Buttons itemStyle = {{
-      background: "crimson",
-      color: "#fff"
-    }} />
+    <Buttons itemStyle={{
+      background: 'crimson',
+      color: '#fff'
+    }}
+    />
   ));

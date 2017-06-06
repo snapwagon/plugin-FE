@@ -23,12 +23,13 @@ class BaseContainer extends React.Component {
       totalAmount: 1,
       offerAmount: 1,
       quantity: 1,
-      message: "",
-      name: "",
-      email: "",
-      phone: "",
-      clientToken: ""
-    }
+      message: '',
+      name: '',
+      email: '',
+      phone: '',
+      clientToken: '',
+      isLoading: true
+    };
 
     this.handleContinue = this.handleContinue.bind(this);
     this.handleStepBack = this.handleStepBack.bind(this);
@@ -57,7 +58,8 @@ class BaseContainer extends React.Component {
         this.setState({
           ...this.state,
           offer: data,
-          totalAmount: data.discounted_value * 1
+          totalAmount: data.discounted_value * 1,
+          isLoading: false
         });
       })
       .catch(console.warn);
@@ -68,7 +70,7 @@ class BaseContainer extends React.Component {
   }
 
   handleContinue(e) {
-    if (this.state.step < 4){
+    if (this.state.step < 4) {
       this.setState({
         ...this.state,
         step: this.state.step + 1
@@ -83,15 +85,12 @@ class BaseContainer extends React.Component {
         step: 1
       });
     }
-    // make the request for braintree token,
-    // plus fire the event for analytics
-    // send attribution data.
   }
 
   handleStepBack(e) {
     this.setState({
       ...this.state,
-      step: this.state.step-1
+      step: this.state.step - 1
     });
   }
 
@@ -118,52 +117,52 @@ class BaseContainer extends React.Component {
     this.setState({
       ...this.state,
       hidden: true
-    })
+    });
   }
 
   renderContent() {
     const stepsMap = {
       1: (<CallToAction
-            handleContinue={this.handleContinue}
-            offerTitle={this.state.offer.title}
-            offerAmount={this.state.offer.discounted_value}
-            offerDiscount={this.state.offer.discount_percentage}
-            offerFullValue={this.state.offer.value}
-            finePrint={this.state.offer.fine_print}
-            offerId={this.state.offer.id}
-          />),
+        handleContinue={this.handleContinue}
+        offerTitle={this.state.offer.title}
+        offerAmount={this.state.offer.discounted_value}
+        offerDiscount={this.state.offer.discount_percentage}
+        offerFullValue={this.state.offer.value}
+        finePrint={this.state.offer.fine_print}
+        offerId={this.state.offer.id}
+        imageUrl={this.state.offer.image_url}
+      />),
       2: (<AccountInfo
-            handleContinue={this.handleContinue}
-            handleStepBack={this.handleStepBack}
-            name={this.state.name}
-            email={this.state.email}
-            quantity={this.state.quantity}
-            phone={this.state.phone}
-            offerTitle={this.state.offer.title}
-            offerAmount={this.state.offer.discounted_value}
-            offerDiscount={this.state.offer.discount_percentage}
-            offerFullValue={this.state.offer.value}
-            totalAmount={this.state.totalAmount}
-            handleInputChange={this.handleInputChange}
-            handleSelect={this.handleSelect}
-            offerId={this.state.offer.id}
-          />),
+        handleContinue={this.handleContinue}
+        handleStepBack={this.handleStepBack}
+        name={this.state.name}
+        email={this.state.email}
+        quantity={this.state.quantity}
+        phone={this.state.phone}
+        offerTitle={this.state.offer.title}
+        offerAmount={this.state.offer.discounted_value}
+        offerDiscount={this.state.offer.discount_percentage}
+        offerFullValue={this.state.offer.value}
+        totalAmount={this.state.totalAmount}
+        handleInputChange={this.handleInputChange}
+        handleSelect={this.handleSelect}
+        offerId={this.state.offer.id}
+      />),
       3: (<PaymentForm
-            handleContinue={this.handleContinue}
-            handleStepBack={this.handleStepBack}
-            clientToken={this.state.clientToken}
-            quantity={this.state.quantity}
-            name={this.state.name}
-            email={this.state.email}
-            phone={this.state.phone}
-            offerId={this.state.offer.id}
-          /> ),
+        handleContinue={this.handleContinue}
+        handleStepBack={this.handleStepBack}
+        clientToken={this.state.clientToken}
+        quantity={this.state.quantity}
+        name={this.state.name}
+        email={this.state.email}
+        phone={this.state.phone}
+        offerId={this.state.offer.id}
+      />),
       4: (<Confirmation
-            handleContinue={this.handleContinue}
-          />)
-    }
+        handleContinue={this.handleContinue}
+      />)
+    };
     return stepsMap[this.state.step];
-
   }
 
   renderModal() {
@@ -178,36 +177,40 @@ class BaseContainer extends React.Component {
           onClick={() => {
             return this.setState({
               ...this.state,
-              hidden:false
-            })
+              hidden: false
+            });
           }}
         />
-      )
+      );
     }
+
+  //   <div className="ui page modals dimmer transition active">
+  //     <div className="ui modal transition visible active" style="margin-top: -284px;">
+  //     <button className="ui right labeled icon positive button"><i aria-hidden="true" className="checkmark icon"></i><!-- react-text: 14 --> <!-- /react-text --><!-- react-text: 15 -->Yep, that's me<!-- /react-text --></button>
+  //   </div>
+  // </div>
 
     const renderedContent = this.renderContent();
     const progress = (this.state.step / 4) * 100;
-
+    const barStyle = {
+      width: `${progress}%`
+    }
     return (
       <Modal
         open={!this.state.hidden}
         onClose={this.handleClose}
-
         size="small"
-        dimmer="true"
-        closeIcon="close"
       >
-        <Progress
-          percent={progress}
-          indicating
-          size="tiny"
-          >
-        </Progress>
+        <div className="ui tiny active indicating progress"
+          data-percent={progress}>
+          <div className="bar" style={barStyle}>
+          </div>
+        </div>
         <Container fluid>
           {renderedContent}
         </Container>
       </Modal>
-    )
+    );
   }
 
   render() {
@@ -231,4 +234,5 @@ BaseContainer.defaultProps = {
   componentName: 'BaseContainer'
 };
 
+// to test
 export default BaseContainer;

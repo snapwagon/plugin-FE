@@ -28,9 +28,7 @@ const Button = (props) => {
             `coup-Button--${props.type}--loading`,
             `coup-Button--${props.size}--loading`,
           )}
-        >
-          
-        </div>
+        />
       )}
     </button>
   );
