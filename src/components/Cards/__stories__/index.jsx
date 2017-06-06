@@ -10,10 +10,11 @@ import Button from '../../Button/Button';
 
 const lifestyleImage = 'https://d2qs5c8ct3mfv5.cloudfront.net/images/standard_Business-4001-f7533f107822795023225e25b6f5dec8-Jumping.JPG';
 storiesOf('Cards', module).addDecorator((story) => (
-  <div style={{
-    maxWidth: '300px',
-    margin: '0 auto'
-  }}
+  <div
+    style={{
+      maxWidth: '300px',
+      margin: '0 auto'
+    }}
   >
     {story()}
   </div>
@@ -21,9 +22,10 @@ storiesOf('Cards', module).addDecorator((story) => (
   return (
     <Cards orientation="column">
       <Section type="Header">
-        <div style={{
-          margin: '0 auto'
-        }}
+        <div
+          style={{
+            margin: '0 auto'
+          }}
         />
       </Section>
       <Section type="Body">
@@ -34,10 +36,11 @@ storiesOf('Cards', module).addDecorator((story) => (
 });
 
 storiesOf('Cards', module).addDecorator((story) => (
-  <div style={{
-    maxWidth: '800px',
-    margin: '0 auto'
-  }}
+  <div
+    style={{
+      maxWidth: '800px',
+      margin: '0 auto'
+    }}
   >
     {story()}
   </div>
