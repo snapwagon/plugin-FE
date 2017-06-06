@@ -1,11 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import times from 'lodash/times';
-
-import bottleImage from 'images/jump.jpg';
-import lifestyleImage from 'images/jump.jpg';
 
 import Cards from '../Cards';
 import Image from '../../Image/Image';
@@ -13,6 +8,7 @@ import Content from '../../Content/Content';
 import Section from '../../Content/Section';
 import Button from '../../Button/Button';
 
+const lifestyleImage = 'https://d2qs5c8ct3mfv5.cloudfront.net/images/standard_Business-4001-f7533f107822795023225e25b6f5dec8-Jumping.JPG';
 storiesOf('Cards', module).addDecorator((story) => (
   <div style={{
     maxWidth: '300px',
@@ -28,14 +24,10 @@ storiesOf('Cards', module).addDecorator((story) => (
         <div style={{
           margin: '0 auto'
         }}
-        >
-          <svg width="80" height="150" viewBox="0 0 33 47" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24.153.976a28.237 28.237 0 0 0-3.535-.754l-.467 7.842h-7.76L11.925.222C10.72.402 9.542.654 8.392.98 7.91 5.999 9.522 18.407 0 24.336v16.389s5.781 6.2 16.274 6.2c10.49 0 16.27-6.598 16.27-6.598V24.336c-9.524-5.929-7.912-18.34-8.39-23.36" fill="#0F346C" fillRule="evenodd" />
-          </svg>
-        </div>
+        />
       </Section>
       <Section type="Body">
-        <Content title="Blue Apron" subtitle="Building a Better Food System" />
+        <Content title="" subtitle="" />
       </Section>
     </Cards>
   );

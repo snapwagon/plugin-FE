@@ -21,7 +21,6 @@ const Confirmation = (props) => {
 };
 
 const {
-  number,
   string,
   func
 } = PropTypes;

@@ -8,9 +8,9 @@ import AccountInfoContainer from '../AccountInfoContainer.jsx';
 storiesOf('AccountInfoContainer', module)
   .add('renders the component', () => (
     <AccountInfoContainer
-      offerTitle="MEGA ALL-ACCESS PASS",
-      offerAmount=17,
-      offerDiscount=34,
-      offerFullValue=26
+      offerTitle="MEGA ALL-ACCESS PASS"
+      offerAmount={17}
+      offerDiscount={34}
+      offerFullValue={26}
     />
   ));

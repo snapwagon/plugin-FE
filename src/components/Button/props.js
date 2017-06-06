@@ -34,7 +34,8 @@ export default {
   type: oneOf([
     'normal',
     'outline'
-  ])
+  ]),
+  customStyle: string
 };
 
 export const defaultProps = {
@@ -45,5 +46,6 @@ export const defaultProps = {
   onClick() {},
   size: 'small',
   text: 'View Offer',
-  type: 'normal'
+  type: 'normal',
+  customStyle: undefined
 };

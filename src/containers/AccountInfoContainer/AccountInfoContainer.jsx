@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Input, Select } from 'semantic-ui-react';
+import { Form, Select } from 'semantic-ui-react';
 
 import { analytics } from '../../utils/utils';
 
@@ -10,10 +10,6 @@ import Button from '../../components/Button/Button';
 class AccountInfoContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      message: ''
-    };
 
     this.handleSelect = this.handleSelect.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
@@ -40,29 +36,22 @@ class AccountInfoContainer extends React.Component {
       });
       return this.props.handleContinue();
     }
+
+    return null;
   }
 
   render() {
-    const message = this.props.warning && (<Message
-      success={this.props.success}
-      header="Could you check something!"
-      list={[
-        'That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.',
-      ]}
-    />);
-
     return (
       <Form size="mini" className="coup-form">
-        {message}
         <Form.Group className="coup-form-flex-group coup-form-flex-group-info">
           <Form.Field id="form-input-control-description" className="coup-field-descriptiion">
-            <label>Description</label>
-            <p className="coup-main-text">{this.props.offerTitle}</p>
+            <label htmlFor="coup-offer-description">Description</label>
+            <p id="coup-offer-description" className="coup-main-text">{this.props.offerTitle}</p>
             <span className="coup-subtitle">Discount: {this.props.offerDiscount}%</span>
             <span className="coup-subtitle">Value: ${this.props.offerFullValue}</span>
           </Form.Field>
 
-          <Form.Select control={Select} label="Qty" control="select" name={this.props.quantity} onChange={this.handleSelect} className="coup-field-center coup-quantity">
+          <Form.Select control={Select} label="Qty" name={this.props.quantity} onChange={this.handleSelect} className="coup-field-center coup-quantity">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -70,12 +59,12 @@ class AccountInfoContainer extends React.Component {
             <option value="5">5</option>
           </Form.Select>
           <Form.Field id="form-input-control-offer-amount" className="">
-            <label>Offer $</label>
-            <p className="coup-main-text">${this.props.offerAmount}</p>
+            <label htmlFor="coup-offer-amount">Offer $</label>
+            <p id="coup-offer-amount" className="coup-main-text">${this.props.offerAmount}</p>
           </Form.Field>
           <Form.Field id="form-input-control-total" className="">
-            <label>Total</label>
-            <p className="coup-main-text">${this.props.totalAmount}</p>
+            <label htmlFor="coup-total-amount">Total</label>
+            <p id="coup-total-amount" className="coup-main-text">${this.props.totalAmount}</p>
           </Form.Field>
         </Form.Group>
 
@@ -99,20 +88,33 @@ const {
 AccountInfoContainer.propTypes = {
   handleContinue: func,
   handleInputChange: func,
+  handleSelect: func,
   offerTitle: string,
   offerAmount: string,
   offerDiscount: string,
   offerFullValue: string,
-  totalAmount: string
+  totalAmount: string.isRequired,
+  name: string,
+  email: string,
+  phone: string,
+  offerId: string,
+  quantity: number
 };
 
 AccountInfoContainer.defaultProps = {
   handleContinue() {},
   handleInputChange() {},
+  handleSelect() {},
   offerTitle: 'MEGA ALL-ACCESS PASS',
   offerAmount: 17,
   offerDiscount: 35,
-  offerFullValue: 24
+  offerFullValue: 24,
+  name: '',
+  email: '',
+  phone: '',
+  offerId: undefined,
+  quantity: 1
+
 };
 
 export default AccountInfoContainer;

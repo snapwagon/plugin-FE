@@ -33,9 +33,9 @@ Content.propTypes = {
 };
 
 Content.defaultProps = {
-  subtitle: "",
-  tagline: "",
-  details: "Offer includes: 90 minutes all access activity time plus grip socks!"
+  subtitle: '',
+  tagline: '',
+  details: 'Offer includes: 90 minutes all access activity time plus grip socks!'
 };
 
 export default Content;

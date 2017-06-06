@@ -1,15 +1,16 @@
 /* eslint-disable import/prefer-default-export */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import ReactDOM from 'react-dom'
-require('../assets/recoop.min.css');
+import ReactDOM from 'react-dom';
 import BaseContainer from './containers/BaseContainer/BaseContainer';
 
-const renderPoint = document.createElement("div", { id: `render-recoop-${1}`});
-renderPoint.setAttribute("id", "render-recoop-1");
+require('../assets/recoop.min.css');
+
+const renderPoint = document.createElement('div', { id: `render-recoop-${1}`});
+renderPoint.setAttribute('id', 'render-recoop-1');
 document.body.appendChild(renderPoint);
 // to render in prod
 ReactDOM.render(
-  <BaseContainer/>,
-  document.getElementById('render-recoop-1'),
-  console.log('loaded')
+  <BaseContainer />,
+  document.getElementById('render-recoop-1')
 );

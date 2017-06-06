@@ -1,11 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-
-import mealImage from '__food__/images/ds-image.jpg';
-
 import Image from '../Image';
+
+const mealImage = 'https://d2qs5c8ct3mfv5.cloudfront.net/images/standard_Business-4001-f7533f107822795023225e25b6f5dec8-Jumping.JPG';
 
 storiesOf('Image', module)
   .addWithInfo('an <Image />', () => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, Progress, Container, Icon } from 'semantic-ui-react';
+import { Modal, Container } from 'semantic-ui-react';
 
 import { getOffer, getToken, analytics } from '../../utils/utils';
 
@@ -46,7 +46,6 @@ class BaseContainer extends React.Component {
     getToken()
       .then((data) => {
         this.setState({
-          ...this.state,
           clientToken: data.token
         });
       })
@@ -56,7 +55,6 @@ class BaseContainer extends React.Component {
       .then((data) => {
         console.log('offer Fetched', data);
         this.setState({
-          ...this.state,
           offer: data,
           totalAmount: data.discounted_value * 1,
           isLoading: false
@@ -65,14 +63,9 @@ class BaseContainer extends React.Component {
       .catch(console.warn);
   }
 
-  componentDidMount() {
-
-  }
-
   handleContinue(e) {
     if (this.state.step < 4) {
       this.setState({
-        ...this.state,
         step: this.state.step + 1
       });
     } else {
@@ -89,14 +82,12 @@ class BaseContainer extends React.Component {
 
   handleStepBack(e) {
     this.setState({
-      ...this.state,
       step: this.state.step - 1
     });
   }
 
   handleSelect(e) {
     this.setState({
-      ...this.state,
       quantity: e.target.value,
       totalAmount: this.state.offer.discounted_value * e.target.value
     });
@@ -108,14 +99,12 @@ class BaseContainer extends React.Component {
     const name = target.name;
 
     this.setState({
-      ...this.state,
       [name]: value
     });
   }
 
   handleClose(event) {
     this.setState({
-      ...this.state,
       hidden: true
     });
   }
@@ -176,7 +165,6 @@ class BaseContainer extends React.Component {
           text="View Exclusive Offers"
           onClick={() => {
             return this.setState({
-              ...this.state,
               hidden: false
             });
           }}
@@ -186,7 +174,9 @@ class BaseContainer extends React.Component {
 
   //   <div className="ui page modals dimmer transition active">
   //     <div className="ui modal transition visible active" style="margin-top: -284px;">
-  //     <button className="ui right labeled icon positive button"><i aria-hidden="true" className="checkmark icon"></i><!-- react-text: 14 --> <!-- /react-text --><!-- react-text: 15 -->Yep, that's me<!-- /react-text --></button>
+  //     <button className="ui right labeled icon positive button">
+  //      <i aria-hidden="true" className="checkmark icon"></i>
+  //     </button>
   //   </div>
   // </div>
 
@@ -194,17 +184,18 @@ class BaseContainer extends React.Component {
     const progress = (this.state.step / 4) * 100;
     const barStyle = {
       width: `${progress}%`
-    }
+    };
     return (
       <Modal
         open={!this.state.hidden}
         onClose={this.handleClose}
         size="small"
       >
-        <div className="ui tiny active indicating progress"
-          data-percent={progress}>
-          <div className="bar" style={barStyle}>
-          </div>
+        <div
+          className="ui tiny active indicating progress"
+          data-percent={progress}
+        >
+          <div className="bar" style={barStyle} />
         </div>
         <Container fluid>
           {renderedContent}

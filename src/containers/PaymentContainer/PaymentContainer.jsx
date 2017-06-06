@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import braintree from 'braintree-web-drop-in';
-import { postPayment, analytics } from '../../utils/utils';
 import cx from 'classnames';
 
-import { Form, Input, Select } from 'semantic-ui-react';
-
+import { postPayment, analytics } from '../../utils/utils';
 import Button from '../../components/Button/Button';
 
 class PaymentContainer extends React.Component {
@@ -20,16 +18,6 @@ class PaymentContainer extends React.Component {
 
     this.handleValidate = this.handleValidate.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
-  }
-
-  compoentWillUnmount() {
-    // hostedFieldsInstance.teardown(function (err) {
-    //   if (err) {
-    //     console.error('Could not tear down Hosted Fields!');
-    //   } else {
-    //     console.log('Hosted Fields has been torn down!');
-    //   }
-    // });
   }
 
   componentDidMount() {
@@ -51,6 +39,16 @@ class PaymentContainer extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    // hostedFieldsInstance.teardown(function (err) {
+    //   if (err) {
+    //     console.error('Could not tear down Hosted Fields!');
+    //   } else {
+    //     console.log('Hosted Fields has been torn down!');
+    //   }
+    // });
+  }
+
   handleValidate(e) {
     if (this.state.isComplete) return this.props.handleContinue();
 
@@ -70,23 +68,25 @@ class PaymentContainer extends React.Component {
       quantity: this.props.quantity
     };
 
-    const handleComplete = () => this.setState({'isComplete': true});
+    const handleComplete = () => this.setState({isComplete: true});
     // const continueCB = this.props.handleContinue;
-    return this.state.instance && this.state.instance.requestPaymentMethod((requestPaymentMethodErr, payload) => {
-      if (requestPaymentMethodErr) {
+    return this.state.instance &&
+      this.state.instance.requestPaymentMethod((
+        requestPaymentMethodErr, payload) => {
+        if (requestPaymentMethodErr) {
         // No payment method is available.
         // An appropriate error will be shown in the UI.
-        console.error(requestPaymentMethodErr);
-        return;
-      }
-      formData.sale.payment_method_nonce = payload.nonce;
+          console.error(requestPaymentMethodErr);
+          return;
+        }
+        formData.sale.payment_method_nonce = payload.nonce;
 
-      analytics.track('Checkout Started', {
-        offerId: formData.offer.id,
-        quantity: formData.quantity
-      });
+        analytics.track('Checkout Started', {
+          offerId: formData.offer.id,
+          quantity: formData.quantity
+        });
       // Submit payload.nonce to your server
-      postPayment(formData)
+        postPayment(formData)
         .then(() => {
           analytics.track('Order Completed', {
             offerId: formData.offer.id,
@@ -99,7 +99,7 @@ class PaymentContainer extends React.Component {
           // this.handleError(error);
           console.warn(error);
         });
-    });
+      });
   }
 
   handleReturn(e) {
@@ -108,23 +108,26 @@ class PaymentContainer extends React.Component {
 
   render() {
     return (
-        <div>
-          <div id="dropin-container" className={cx('dropin-container', {
-            "dropin-container--hidden": this.state.isLoading
-          })}/>
-          <Button
-            id="back-button"
-            text="Back"
-            size="small"
-            onClick={this.handleReturn}
-          />
-          <Button
-            id="submit-button"
-            text="Purchase"
-            size="small"
-            onClick={this.handleValidate}
-          />
-        </div>
+      <div>
+        <div
+          id="dropin-container"
+          className={cx('dropin-container', {
+            'dropin-container--hidden': this.state.isLoading
+          })}
+        />
+        <Button
+          id="back-button"
+          text="Back"
+          size="small"
+          onClick={this.handleReturn}
+        />
+        <Button
+          id="submit-button"
+          text="Purchase"
+          size="small"
+          onClick={this.handleValidate}
+        />
+      </div>
     );
   }
 }
@@ -136,17 +139,25 @@ const {
 } = PropTypes;
 
 PaymentContainer.propTypes = {
-  handleStepBack() {},
-  handleContinue() {},
-  offerTitle: string,
-  offerAmount: number,
-  offerDiscount: number,
-  offerFullValue: number,
+  handleStepBack: func,
+  handleContinue: func,
+  clientToken: string,
+  name: string,
+  email: string,
+  phone: string,
+  offerId: string,
+  quantity: number
 };
 
 PaymentContainer.defaultProps = {
-  offerTitle: 'MEGA ALL-ACCESS PASS',
-  offerAmount: 17
+  handleContinue() { },
+  handleStepBack() { },
+  clientToken: undefined,
+  name: '',
+  email: '',
+  phone: '',
+  offerId: undefined,
+  quantity: 1
 };
 
 export default PaymentContainer;

@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import serialize from 'serialize-javascript';
+// import serialize from 'serialize-javascript';
 
 import Segment from 'load-segment';
 
