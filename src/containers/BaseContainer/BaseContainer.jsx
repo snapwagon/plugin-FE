@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, Container } from 'semantic-ui-react';
+// import { Modal } from 'semantic-ui-react';
 
 import { getOffer, getToken, analytics } from '../../utils/utils';
 
@@ -9,6 +9,7 @@ import CallToAction from '../CTAContainer/CTAContainer';
 import AccountInfo from '../AccountInfoContainer/AccountInfoContainer';
 import PaymentForm from '../PaymentContainer/PaymentContainer';
 import Button from '../../components/Button/Button';
+import Modal from '../../components/Modal/Modal';
 import Confirmation from '../../components/Confirmation/Confirmation';
 
 class BaseContainer extends React.Component {
@@ -38,10 +39,6 @@ class BaseContainer extends React.Component {
     this.handleClose = this.handleClose.bind(this);
 
     analytics.page();
-    analytics.track('Product Viewed', {
-      offerId: this.state.offer.id,
-      clientId: this.state.clientId
-    });
 
     getToken()
       .then((data) => {
@@ -56,7 +53,7 @@ class BaseContainer extends React.Component {
         console.log('offer Fetched', data);
         this.setState({
           offer: data,
-          totalAmount: data.discounted_value * 1,
+          totalAmount: (data.discounted_value * 1).toFixed(2),
           isLoading: false
         });
       })
@@ -70,11 +67,9 @@ class BaseContainer extends React.Component {
       });
     } else {
       this.setState({
-        ...this.state,
         hidden: true
       });
       this.setState({
-        ...this.state,
         step: 1
       });
     }
@@ -89,7 +84,7 @@ class BaseContainer extends React.Component {
   handleSelect(e) {
     this.setState({
       quantity: e.target.value,
-      totalAmount: this.state.offer.discounted_value * e.target.value
+      totalAmount: (this.state.offer.discounted_value * e.target.value).toFixed(2)
     });
   }
 
@@ -119,6 +114,7 @@ class BaseContainer extends React.Component {
         offerFullValue={this.state.offer.value}
         finePrint={this.state.offer.fine_print}
         offerId={this.state.offer.id}
+        clientId={this.state.clientId}
         imageUrl={this.state.offer.image_url}
       />),
       2: (<AccountInfo
@@ -172,14 +168,6 @@ class BaseContainer extends React.Component {
       );
     }
 
-  //   <div className="ui page modals dimmer transition active">
-  //     <div className="ui modal transition visible active" style="margin-top: -284px;">
-  //     <button className="ui right labeled icon positive button">
-  //      <i aria-hidden="true" className="checkmark icon"></i>
-  //     </button>
-  //   </div>
-  // </div>
-
     const renderedContent = this.renderContent();
     const progress = (this.state.step / 4) * 100;
     const barStyle = {
@@ -197,9 +185,7 @@ class BaseContainer extends React.Component {
         >
           <div className="bar" style={barStyle} />
         </div>
-        <Container fluid>
-          {renderedContent}
-        </Container>
+        {renderedContent}
       </Modal>
     );
   }

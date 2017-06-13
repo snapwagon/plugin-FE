@@ -19,32 +19,6 @@ Front end of the ish
   * [Adding Mock Data](#adding-mock-data)
 * [Versioning](#versioning)
 
-## Setup
-
-You need to configure your local and project npm to install packages from the Gemfury npm registry in order to install pomegranate-ui.
-
-### Local
-Add the Gemfury npm registry to your `.npmrc`:
-```bash
-npm config set registry https://npm-proxy.fury.io/$(heroku config:get GEMFURY_TOKEN -a blueapron-staging)/blueapron
-```
-### Project
-Add the `GEMFURY_TOKEN` to your `Apronfile`:
-```yaml
-pipeline:
-  build:
-    arguments:
-      - GEMFURY_TOKEN
-```
-Add the Gemfury npm registry to your project `.npmrc` via a Dockerfile:
-```Dockerfile
-ARG GEMFURY_TOKEN
-RUN npm config set registry https://npm-proxy.fury.io/${GEMFURY_TOKEN}/blueapron
-
-COPY package.json /opt/<project>/
-RUN npm install
-```
-
 ## Installation and Usage
 
 pomegranate-ui can be included in your project via two methods: 1. as an ES module (preferred); 2. as a script tag that contains a global `Pomegranate`. The npm module includes both formats.
@@ -73,10 +47,11 @@ const MyComponent = (props) => (
 ```
 ### Prebuilt Script Usage
 
-1. Include the `dist/pomegranate.js` or `dist/pomegranate.min.js` file in your project
+1. Include the `dist/recoop.js` or `dist/recoop.min.js` file in your project
 ```
-<script src="your-path-to/node_modules/pomegranate-ui/dist/pomegranate.js"></script>
+<script src="your-path-to/node_modules/recoop-ui/dist/recoop.js"></script>
 ```
+
 2. Use the global `Pomegranate` to access the components.
 ```javascript
 const MyComponent = function (props) {
@@ -230,30 +205,7 @@ describe('<Button /> interactions', () => {
 
 The best way to make mock data available to your stories or tests is by including your data alongside the component in an appropriate directory as an importable asset. This is preferred because it maintains the idea that components are bundled units with the code, tests, stories, fixtures all in one place.
 
-```javascript
-// components/Order/__stories__/__mock__/mock-order.js
-
-export default {
-  price: '60.00',
-  deliveryDate: "Thu Apr 13 2017 16:04:10 GMT-0400 (EDT)"
-};
-
-// components/Order/__stories__/images/super-cool-background.jpg;
-
-// components/Order/__stories__/index.jsx
-import MOCK_ORDER from './__mock__/mock-order';
-import SUPER_COOL_BACKGROUND from './images/super-cool-background.jpg'; // Webpack uses loaders to handle assets like images
-
-// components/Order/__tests__/Order.spec.jsx
-import MOCK_ORDER from './__mock__/mock-order';
-```
-
-In some scenarios, you'll want to make mock data available to multiple files. You can use the `__mock__` directory in the project root. See the [README](./__mock__/README.md) for more info.
 
 # Versioning
 
 For all changes, you'll need to bump the `VERSION` file to the appropriate [semantic version](http://semver.org/)
-
-# Happy React-ing ;)
-
-![alt tag](./.github/michael-scott.gif)

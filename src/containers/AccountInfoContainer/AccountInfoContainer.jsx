@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Select } from 'semantic-ui-react';
+// import { Form } from 'semantic-ui-react';
 
 import { analytics } from '../../utils/utils';
 
@@ -51,7 +51,7 @@ class AccountInfoContainer extends React.Component {
             <span className="coup-subtitle">Value: ${this.props.offerFullValue}</span>
           </Form.Field>
 
-          <Form.Select control={Select} label="Qty" name={this.props.quantity} onChange={this.handleSelect} className="coup-field-center coup-quantity">
+          <Form.Select control="select" label="Qty" value={this.props.quantity} name="quantity" onChange={this.handleSelect} className="coup-field-center coup-quantity">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -73,7 +73,13 @@ class AccountInfoContainer extends React.Component {
           <Form.Input id="form-input-control-email" label="Email" type="email" value={this.props.email} name="email" placeholder="awesomemom@gmail.com" className="coup-input-third" onChange={this.handleInputChange} required />
           <Form.Input id="form-input-control-phone" type="tel" label="Phone" placeholder="Phone" className="coup-input-third" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
         </Form.Group>
-        <Form.Button id="form-button-control-public" content="Confirm" control={Button} text="Continue" onClick={this.handleValidate} />
+        <Button
+          id="account-back-button"
+          text="Back"
+          size="small"
+          onClick={this.props.handleStepBack}
+        />
+        <Button id="form-button-control-public" content="Confirm" control={Button} text="Continue" onClick={this.handleValidate} />
       </Form>
     );
   }
