@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-// import serialize from 'serialize-javascript';
 
 import Segment from 'load-segment';
 
@@ -12,6 +11,17 @@ export const analytics = Segment({key: 'kfLYgloGKOIzTjzdQtb3bsMQ5LeOrraY'});
 
 export const getOffer = (offerId) => {
   return fetch(`http://alacode.org/api/offer/${offerId}/`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(parseResponse);
+};
+
+export const getOffers = () => {
+  return fetch(`http://alacode.org/api/organization/1/offer/`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

@@ -16,7 +16,6 @@ const Content = (props) => {
         </p>
       )}
       {props.tagline && <p className="coup-Content__text coup-Content__tagline">{props.tagline}</p>}
-      <p className="coup-Content__text coup-Content__tagline">{props.details}</p>
     </div>
   );
 };
@@ -35,7 +34,6 @@ Content.propTypes = {
 Content.defaultProps = {
   subtitle: '',
   tagline: '',
-  details: 'Offer includes: 90 minutes all access activity time plus grip socks!'
 };
 
 export default Content;

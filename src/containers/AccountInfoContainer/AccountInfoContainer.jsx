@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-// import { Form } from 'semantic-ui-react';
+import toMarkdown from 'to-markdown'
+import marked from 'marked'
 
 import { analytics } from '../../utils/utils';
 
@@ -10,6 +10,11 @@ import Button from '../../components/Button/Button';
 class AccountInfoContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      emailError: false,
+      nameError: false
+    };
 
     this.handleSelect = this.handleSelect.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
@@ -35,6 +40,13 @@ class AccountInfoContainer extends React.Component {
         offerId: this.props.offerId
       });
       return this.props.handleContinue();
+    } else {
+      !this.props.name && this.setState({
+        nameError: true
+      });
+      !this.props.email && this.setState({
+        emailError: true
+      });
     }
 
     return null;
@@ -42,45 +54,63 @@ class AccountInfoContainer extends React.Component {
 
   render() {
     return (
-      <Form size="mini" className="coup-form">
-        <Form.Group className="coup-form-flex-group coup-form-flex-group-info">
-          <Form.Field id="form-input-control-description" className="coup-field-descriptiion">
+      <div className="ui mini form coup-form">
+        <div className="coup-form-flex-group coup-form-flex-group-info">
+          <div id="form-input-control-description" className="field coup-field-descriptiion">
             <label htmlFor="coup-offer-description">Description</label>
             <p id="coup-offer-description" className="coup-main-text">{this.props.offerTitle}</p>
             <span className="coup-subtitle">Discount: {this.props.offerDiscount}%</span>
             <span className="coup-subtitle">Value: ${this.props.offerFullValue}</span>
-          </Form.Field>
+          </div>
 
-          <Form.Select control="select" label="Qty" value={this.props.quantity} name="quantity" onChange={this.handleSelect} className="coup-field-center coup-quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </Form.Select>
-          <Form.Field id="form-input-control-offer-amount" className="">
+
+          <div id="form-input-control-qty" className="field coup-field-descriptiion">
+            <label htmlFor="coup-select-qty">Qty</label>
+            <select id="coup-select-qty" value={this.props.quantity} name="quantity" onChange={this.handleSelect} className="coup-field-center coup-quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div id="form-input-control-offer-amount" className="field">
             <label htmlFor="coup-offer-amount">Offer $</label>
             <p id="coup-offer-amount" className="coup-main-text">${this.props.offerAmount}</p>
-          </Form.Field>
-          <Form.Field id="form-input-control-total" className="">
+          </div>
+          <div id="form-input-control-total" className="field">
             <label htmlFor="coup-total-amount">Total</label>
             <p id="coup-total-amount" className="coup-main-text">${this.props.totalAmount}</p>
-          </Form.Field>
-        </Form.Group>
+          </div>
+        </div>
 
-        <Form.Group className="coup-form-flex-group">
-          <Form.Input id="form-input-control-full-name" label="Name" placeholder="Name" name="name" value={this.props.name} className="coup-input-third" onChange={this.handleInputChange} required />
-          <Form.Input id="form-input-control-email" label="Email" type="email" value={this.props.email} name="email" placeholder="awesomemom@gmail.com" className="coup-input-third" onChange={this.handleInputChange} required />
-          <Form.Input id="form-input-control-phone" type="tel" label="Phone" placeholder="Phone" className="coup-input-third" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
-        </Form.Group>
+        <div className="coup-form-flex-group">
+          <div className={`${this.state.nameError ? 'error' : ''} field coup-input-third`}>
+            <label htmlFor="form-input-control-full-name">Name</label>
+            <input id="form-input-control-full-name" label="Name" placeholder="Name" name="name" value={this.props.name} className="ui input" onChange={this.handleInputChange} required />
+          </div>
+          <div className={`${this.state.emailError ? 'error' : ''} field coup-input-third`}>
+            <label htmlFor="form-input-control-email">Email</label>
+            <input id="form-input-control-email" label="Email" type="email" value={this.props.email} name="email" placeholder="awesomemom@gmail.com" className="ui input" onChange={this.handleInputChange} required />
+          </div>
+          <div className="field coup-input-third">
+            <label htmlFor="form-input-control-phone">Phone</label>
+            <input id="form-input-control-phone" type="tel" label="Phone" placeholder="Phone" className="ui input" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
+          </div>
+        </div>
         <Button
           id="account-back-button"
           text="Back"
           size="small"
           onClick={this.props.handleStepBack}
         />
-        <Button id="form-button-control-public" content="Confirm" control={Button} text="Continue" onClick={this.handleValidate} />
-      </Form>
+        <Button
+          id="form-button-control-public"
+          content="Confirm"
+          text="Continue"
+          onClick={this.handleValidate}
+        />
+      </div>
     );
   }
 }

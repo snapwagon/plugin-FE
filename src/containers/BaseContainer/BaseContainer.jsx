@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { Modal } from 'semantic-ui-react';
-
 import { getOffer, getToken, analytics } from '../../utils/utils';
 
 import CallToAction from '../CTAContainer/CTAContainer';
@@ -29,7 +27,8 @@ class BaseContainer extends React.Component {
       email: '',
       phone: '',
       clientToken: '',
-      isLoading: true
+      isLoading: true,
+      isFinePrintVisible: false
     };
 
     this.handleContinue = this.handleContinue.bind(this);
@@ -37,6 +36,7 @@ class BaseContainer extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleShowFinePrint = this.handleShowFinePrint.bind(this);
 
     analytics.page();
 
@@ -66,12 +66,12 @@ class BaseContainer extends React.Component {
         step: this.state.step + 1
       });
     } else {
-      this.setState({
+      this.setState(() => ({
         hidden: true
-      });
-      this.setState({
+      }));
+      this.setState(() => ({
         step: 1
-      });
+      }));
     }
   }
 
@@ -86,6 +86,12 @@ class BaseContainer extends React.Component {
       quantity: e.target.value,
       totalAmount: (this.state.offer.discounted_value * e.target.value).toFixed(2)
     });
+  }
+
+  handleShowFinePrint(e) {
+    this.setState({
+      isFinePrintVisible: true
+    })
   }
 
   handleInputChange(event) {
@@ -112,10 +118,12 @@ class BaseContainer extends React.Component {
         offerAmount={this.state.offer.discounted_value}
         offerDiscount={this.state.offer.discount_percentage}
         offerFullValue={this.state.offer.value}
-        finePrint={this.state.offer.fine_print}
+        finePrint={this.state.offer.desc}
         offerId={this.state.offer.id}
         clientId={this.state.clientId}
         imageUrl={this.state.offer.image_url}
+        handleShowFinePrint={this.handleShowFinePrint}
+        isFinePrintVisible={this.state.isFinePrintVisible}
       />),
       2: (<AccountInfo
         handleContinue={this.handleContinue}
@@ -147,6 +155,7 @@ class BaseContainer extends React.Component {
         handleContinue={this.handleContinue}
       />)
     };
+
     return stepsMap[this.state.step];
   }
 

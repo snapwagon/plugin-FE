@@ -52,9 +52,11 @@
     "babel-eslint": "7.2.2",
     "babel-jest": "19.0.0",
     "babel-loader": "6.4.1",
+    "babel-preset-env": "^1.5.2",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
+    "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.28.0",
     "cssnano": "3.10.0",
     "enzyme": "2.8.2",
@@ -84,8 +86,6 @@
     "postcss-scss": "0.4.1",
     "precss": "1.4.0",
     "promisify-node": "0.4.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
     "react-test-renderer": "15.5.4",
     "recompose": "0.23.1",
     "rimraf": "2.6.1",
@@ -96,12 +96,18 @@
     "webpack-dev-server": "2.4.2"
   },
   "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "braintree-web-drop-in": "1.1.0",
     "classnames": "2.2.5",
     "isomorphic-fetch": "2.2.1",
     "load-segment": "1.0.1",
+    "marked": "^0.3.6",
+    "material-design-lite": "^1.3.0",
     "preact": "^8.1.0",
     "preact-compat": "^3.16.0",
-    "prop-types": "15.5.8"
+    "preact-mdl": "^2.2.1",
+    "prop-types": "15.5.10",
+    "to-markdown": "^3.0.4"
   }
 }

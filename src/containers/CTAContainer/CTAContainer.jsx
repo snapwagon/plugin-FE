@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import toMarkdown from 'to-markdown'
+import marked from 'marked'
+
 import { analytics } from '../../utils/utils';
 
 import Cards from '../../components/Cards/Cards';
@@ -13,12 +16,9 @@ class CTAContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isFinePrintVisible: false
-    }
-
     this.handleInterest = this.handleInterest.bind(this);
   }
+
   handleInterest() {
     analytics.track('Product Viewed', {
       offerId: this.props.offerId,
@@ -26,22 +26,42 @@ class CTAContainer extends React.Component {
     });
     return this.props.handleContinue();
   }
+
   render() {
+    const savingsAmt = this.props.offerFullValue - this.props.offerAmount;
     const detailLine = `Discount: ${this.props.offerDiscount}% Value: $${this.props.offerFullValue}`;
 
+    const markup = this.props.finePrint;
+    const sanitize = (htmlString) => {
+      return { __html: marked(toMarkdown(htmlString), {sanitize: true})}
+    }
+
     return (
-      <Cards>
+      <Cards orientation="portrait">
         <Section type="Header">
           <Image src={this.props.imageUrl} alt={this.props.offerTitle} />
         </Section>
         <Section type="Body">
-          <Content title={this.props.offerTitle} subtitle={`ONLY $${this.props.offerAmount}`} tagline={detailLine} details={this.props.finePrint} />
-          <section className={`coup-SubSection coup-SubSection--${this.state.isFinePrintVisible}`}>
-
-          </section>
+          <Content title={this.props.offerTitle} subtitle={`ONLY $${this.props.offerAmount}`} tagline={detailLine}/>
+          {
+            !this.props.isFinePrintVisible ?
+              (<button
+                className={`coup-SubSection--Link--Button`}
+                onClick={this.props.handleShowFinePrint}
+              >
+                Fine print...
+              </button>) :
+              (
+                <div
+                  dangerouslySetInnerHTML={sanitize(markup)}
+                  className={`coup-SubSection coup-SubSection--${this.props.isFinePrintVisible}`}>
+                </div>
+              )
+          }
           <Button
             onClick={this.handleInterest}
             size="small"
+            text={`Save $${savingsAmt}!`}
             style={{ color: 'white', background: '#155885' }}
           />
         </Section>
@@ -53,7 +73,8 @@ class CTAContainer extends React.Component {
 const {
   number,
   string,
-  func
+  func,
+  bool
 } = PropTypes;
 
 CTAContainer.propTypes = {
@@ -63,7 +84,9 @@ CTAContainer.propTypes = {
   offerDiscount: number,
   offerFullValue: string,
   finePrint: string,
-  imageUrl: string
+  imageUrl: string,
+  isFinePrintVisible: bool,
+  handleShowFinePrint: func
 };
 
 CTAContainer.defaultProps = {
@@ -73,7 +96,9 @@ CTAContainer.defaultProps = {
   offerDiscount: 30,
   offerFullValue: '',
   imageUrl: '',
-  finePrint: ''
+  finePrint: '',
+  isFinePrintVisible: false,
+  handleShowFinePrint() {}
 };
 
 export default CTAContainer;

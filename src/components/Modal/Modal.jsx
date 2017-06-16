@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 const Modal = (props) => {
   return (
-    <div
-      className={`ui page ${props.open ? 'visible' : ''} dimmer`}
-      onClick={props.onClose}
-      >
+    <div>
       <div className={`ui small ${props.open ? 'active' : ''} modal`}>
         {props.children}
       </div>
+      <div
+        className={`ui page ${props.open ? 'visible' : ''} dimmer`}
+        onClick={props.onClose}
+      />
     </div>
   );
 }
