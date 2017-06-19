@@ -1,19 +1,89 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import toMarkdown from 'to-markdown'
+import marked from 'marked'
 
-const Cards = (props) => {
-  return (
-    <div
-      className={cx(
-        'coup-Cards',
-        `coup-Cards--${props.orientation}`,
-        props.classNames
-      )}
-    >
-      {props.children}
-    </div>
-  );
+import { analytics } from '../../utils/utils';
+
+import Image from '../../components/Image/Image';
+import Content from '../../components/Content/Content';
+import Section from '../../components/Content/Section';
+import Button from '../../components/Button/Button';
+
+class Cards extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isFinePrintVisible: false
+    }
+
+    this.handleShowFinePrint = this.handleShowFinePrint.bind(this);
+    this.handleInterest = this.handleInterest.bind(this);
+  }
+
+  handleInterest(e) {
+    analytics.track('Product Viewed', {
+      offerId: this.props.offer.id,
+      clientId: this.props.clientId
+    });
+    return this.props.handleContinue(this.props.offer.id);
+  }
+
+  handleShowFinePrint(e) {
+    this.setState({
+      isFinePrintVisible: true
+    })
+  }
+
+  render() {
+    const savingsAmt = this.props.offer.value - this.props.offer.discounted_value;
+    const detailLine = `Discount: ${this.props.offer.discount_percentage}% Value: $${this.props.offer.value}`;
+
+    const markup = this.props.offer.desc;
+    const sanitize = (htmlString) => {
+      return { __html: marked(toMarkdown(htmlString), {sanitize: true})}
+    };
+
+    return (
+      <div
+        className={cx(
+          'coup-Cards',
+          `coup-Cards--${this.props.orientation}`,
+          this.props.classNames
+        )}
+      >
+        <Section type="Header">
+          <Image src={this.props.offer.image_url} alt={this.props.offer.title} />
+        </Section>
+        <Section type="Body">
+          <Content title={this.props.offer.title} subtitle={`ONLY $${this.props.offer.discounted_value}`} tagline={detailLine}/>
+          {this.props.offer.desc && (
+           !this.state.isFinePrintVisible ?
+             (<button
+               className={`coup-SubSection--Link--Button`}
+               onClick={this.handleShowFinePrint}
+             >
+               Fine print...
+             </button>) :
+             (
+               <div
+                 dangerouslySetInnerHTML={sanitize(markup)}
+                 className={`coup-SubSection coup-SubSection--${this.state.isFinePrintVisible}`}>
+               </div>
+             )
+           )
+         }
+          <Button
+            onClick={this.handleInterest}
+            size="small"
+            text={`Save $${savingsAmt}!`}
+          />
+        </Section>
+      </div>
+    );
+  }
 };
 
 const {
@@ -31,19 +101,17 @@ Cards.propTypes = {
     string,
     objectOf(bool)
   ]),
-  children: oneOfType([
-    arrayOf(node),
-    node
-  ]).isRequired,
   orientation: oneOf([
     'column',
     'row'
-  ])
+  ]),
+  offer: objectOf(node)
 };
 
 Cards.defaultProps = {
   classNames: undefined,
-  orientation: 'row'
+  orientation: 'row',
+  offer: {},
 };
 
 export default Cards;

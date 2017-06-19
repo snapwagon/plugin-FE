@@ -12,8 +12,9 @@ class PaymentContainer extends React.Component {
 
     this.state = {
       instance: undefined,
-      isLoading: true,
-      isComplete: false
+      isLoading: false,
+      isComplete: false,
+      message: undefined
     };
 
     this.handleValidate = this.handleValidate.bind(this);
@@ -30,10 +31,12 @@ class PaymentContainer extends React.Component {
        // incorrect configuration values or network issues.
        // An appropriate error will be shown in the UI.
         console.error(createErr);
+        this.setState({
+          message: createErr
+        });
       } else {
         this.setState({
-          instance,
-          isLoading: false
+          instance
         });
       }
     });
@@ -51,6 +54,9 @@ class PaymentContainer extends React.Component {
 
   handleValidate(e) {
     if (this.state.isComplete) return this.props.handleContinue();
+    this.setState({
+      isLoading: true
+    });
 
     const formData = {
       sale: {
@@ -69,6 +75,7 @@ class PaymentContainer extends React.Component {
     };
 
     const handleComplete = () => this.setState({isComplete: true});
+    const handleError = (error) => this.setState({ message: error });
     // const continueCB = this.props.handleContinue;
     return this.state.instance &&
       this.state.instance.requestPaymentMethod((
@@ -96,8 +103,8 @@ class PaymentContainer extends React.Component {
           return handleComplete();
         })
         .catch((error) => {
-          // this.handleError(error);
-          console.warn(error);
+          debugger;
+          return handleError(error);
         });
       });
   }
@@ -108,7 +115,12 @@ class PaymentContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={`ui form ${this.state.message && 'error'}`} >
+        {this.state.message && (
+          <div className="error">
+            {this.state.message}
+          </div>)
+        }
         <div
           id="dropin-container"
           className={cx('dropin-container', {
@@ -126,6 +138,7 @@ class PaymentContainer extends React.Component {
           text="Purchase"
           size="small"
           onClick={this.handleValidate}
+          isLoading={this.state.isLoading}
         />
       </div>
     );

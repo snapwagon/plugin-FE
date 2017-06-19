@@ -21,30 +21,9 @@ Front end of the ish
 
 ## Installation and Usage
 
-pomegranate-ui can be included in your project via two methods: 1. as an ES module (preferred); 2. as a script tag that contains a global `Pomegranate`. The npm module includes both formats.
-
-`cd your-project && npm install pomegrante-ui --save`
-
 ### Module Usage
 
-If you're bundling your project with a bundler like `webpack`, `rollup`, or `browserify`, you can import individual components.
-```javascript
-import React from 'react';
-import { Button } from 'pomegranate-ui';
 
-const MyComponent = (props) => (
-  return (
-    <div>
-      <h1>Button</h1>
-      <Button
-        color="white"
-        type="full"
-        text={props.text}
-      />
-    </div>
-  );
-);
-```
 ### Prebuilt Script Usage
 
 1. Include the `dist/recoop.js` or `dist/recoop.min.js` file in your project
@@ -52,13 +31,13 @@ const MyComponent = (props) => (
 <script src="your-path-to/node_modules/recoop-ui/dist/recoop.js"></script>
 ```
 
-2. Use the global `Pomegranate` to access the components.
+2. Use the global `Recoop` to access the components.
 ```javascript
 const MyComponent = function (props) {
   return (
-    <Pomegranate.Card>
+    <Recoop.Card>
       <div>Hello?</div>
-    </Pomegranate.Card>
+    </Recoop.Card>
   );
 };
 ```
@@ -138,12 +117,6 @@ Storybook is an isolated development environment for your components where you w
 
 ## Application development
 
-To develop in a project, you'll need to `npm link` your local pomegranate-ui to the target application. Since we use nodenv for most of our projects, you'll have to make sure you set the correct `NODENV_VERSION` for your target application when you run `npm link`. The `package.json` entry points to `lib/index.js` so make sure to run `npm run build` to generate the transpiled components.
-
-0. `cd pomegranate-ui && NODENV_VERSION=<YOUR APPLICATION VERSION> npm link && npm run build`
-0. `cd <YOUR APPLICATION> && npm link pomegranate-ui`
-
-The `node_modules` directory should include a symlinked directory for your local pomegranate-ui. Follow the usage instructions above as normal.
 
 ## Testing and Linting
 

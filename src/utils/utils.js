@@ -20,8 +20,8 @@ export const getOffer = (offerId) => {
   .then(parseResponse);
 };
 
-export const getOffers = () => {
-  return fetch(`http://alacode.org/api/organization/1/offer/`, {
+export const getOffers = (clientId) => {
+  return fetch(`http://alacode.org/api/organization/${clientId}/offer/`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -51,6 +51,6 @@ export const postPayment = (data) => {
   })
     .then((response) => {
       if (response.ok) return response.json();
-      throw new Error(response);
+      throw new Error(response.statusText);
     });
 };

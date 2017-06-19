@@ -3,7 +3,6 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { h, render } from 'preact';
 import BaseContainer from './containers/BaseContainer/BaseContainer';
 
 require('../assets/recoop.min.css');

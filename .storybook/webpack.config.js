@@ -21,6 +21,10 @@ module.exports = {
         test: /\.(jpg|png|mp3|wav|ogg)$/,
         loaders: ['url-loader']
       },
+      {
+          test: /\.(eot|svg|ttf|woff|woff2|gif)$/,
+          loader: 'file?name=public/fonts/[name].[ext]'
+      }
     ],
   },
   resolve: {

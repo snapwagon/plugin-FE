@@ -1,10 +1,9 @@
 .coup-Content {
   box-sizing: border-box;
-  padding: 16px 0 0 16px;
+  padding: 1em 1em 0 1em;
   margin: 0;
   font-size: $medium;
   overflow: hidden;
-  max-width: 277px;
   font-family: $lato;
 }
 
@@ -79,25 +78,6 @@
   &--large {
     width: 350px;
   }
-
-  // Gross
-  &--minimum-height {
-    &.coup-Card--portrait {
-      min-height: 362px;
-    }
-
-    .coup-Cards--row-scroll &.coup-Card--portrait {
-      min-height: 214px;
-    }
-
-    &.coup-Card--landscape {
-      min-height: 168px;
-    }
-  }
-
-  &--is-disabled {
-    @include disabled;
-  }
 }
 
 .coup-Card__Header {
@@ -147,44 +127,31 @@
   }
 }
 
-.coup-Card__Footer {
-  margin-top: auto;
+.coup-SubSection--Link--Button {
+  background-color: inherit;
+  border: 0;
+  text-align: left;
+  margin: 1em 0 1em 10px;
+  font-family: $lato;
+  font-size: $xsmall;
+  color: $gray;
+}
 
-  &--landscape {
-    flex: 1 0 100%;
+.coup-SubSection {
+  text-align: left;
+  margin: 1em;
+  font-family: $lato;
+  font-size: $xsmall;
+  color: $gray;
+  height: auto;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 6px;
   }
 
-  &--portrait {
-    width: 100%;
-  }
-}
-
-.coup-Section--split {
-  flex: 1 0 50%;
-  height: 120px;
-}
-
-.coup-Card--is-selected .coup-Content--action {
-  transform: translateY(0px);
-  text-decoration: none;
-}
-
-.content-slide-up-enter {
-  transform: translateY(100%);
-  background-color: $lightBlueGray;
-
-  &.content-slide-up-enter-active {
-    transform: translateY(0);
-    transition: transform 0.6s ease-in-out;
-  }
-}
-
-.content-slide-up-leave {
-  transform: translateY(0);
-
-  &.content-slide-up-leave-active {
-    transform: translateY(-100%);
-    transition: transform 0.6s ease-in-out;
-    background-color: $lightBlueGray;
+  ul {
+    margin: 0;
+    padding-left: 20px;
   }
 }

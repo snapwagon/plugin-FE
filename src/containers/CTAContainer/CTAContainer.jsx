@@ -1,72 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import toMarkdown from 'to-markdown'
-import marked from 'marked'
-
-import { analytics } from '../../utils/utils';
+import Slider from 'react-slick';
 
 import Cards from '../../components/Cards/Cards';
-import Image from '../../components/Image/Image';
-import Content from '../../components/Content/Content';
-import Section from '../../components/Content/Section';
-import Button from '../../components/Button/Button';
+
 
 class CTAContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleInterest = this.handleInterest.bind(this);
   }
 
-  handleInterest() {
-    analytics.track('Product Viewed', {
-      offerId: this.props.offerId,
-      clientId: this.props.clientId
-    });
-    return this.props.handleContinue();
+  renderOfferList() {
+    return this.props.offers
+      .map((offer, index) => {
+        return (
+          <div key={offer.id}>
+            <Cards
+              orientation="column"
+              offer={offer}
+              clientId={this.props.clientId}
+              handleContinue={this.props.handleContinue}
+              handleShowFinePrint={this.props.handleShowFinePrint}
+              isFinePrintVisible={this.props.isFinePrintVisible}
+            />
+          </div>
+        );
+      });
   }
 
   render() {
-    const savingsAmt = this.props.offerFullValue - this.props.offerAmount;
-    const detailLine = `Discount: ${this.props.offerDiscount}% Value: $${this.props.offerFullValue}`;
-
-    const markup = this.props.finePrint;
-    const sanitize = (htmlString) => {
-      return { __html: marked(toMarkdown(htmlString), {sanitize: true})}
+    const settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      accessibility: true,
+      adaptiveHeight: true,
+    };
+    const offerComponents = this.renderOfferList();
+    if (offerComponents.length > 0) {
+      return (
+        <Slider {...settings}>
+          {offerComponents}
+        </Slider>
+      )
+    } else {
+      return null;
     }
-
-    return (
-      <Cards orientation="portrait">
-        <Section type="Header">
-          <Image src={this.props.imageUrl} alt={this.props.offerTitle} />
-        </Section>
-        <Section type="Body">
-          <Content title={this.props.offerTitle} subtitle={`ONLY $${this.props.offerAmount}`} tagline={detailLine}/>
-          {
-            !this.props.isFinePrintVisible ?
-              (<button
-                className={`coup-SubSection--Link--Button`}
-                onClick={this.props.handleShowFinePrint}
-              >
-                Fine print...
-              </button>) :
-              (
-                <div
-                  dangerouslySetInnerHTML={sanitize(markup)}
-                  className={`coup-SubSection coup-SubSection--${this.props.isFinePrintVisible}`}>
-                </div>
-              )
-          }
-          <Button
-            onClick={this.handleInterest}
-            size="small"
-            text={`Save $${savingsAmt}!`}
-            style={{ color: 'white', background: '#155885' }}
-          />
-        </Section>
-      </Cards>
-    );
   };
 };
 
@@ -84,9 +66,7 @@ CTAContainer.propTypes = {
   offerDiscount: number,
   offerFullValue: string,
   finePrint: string,
-  imageUrl: string,
-  isFinePrintVisible: bool,
-  handleShowFinePrint: func
+  imageUrl: string
 };
 
 CTAContainer.defaultProps = {
