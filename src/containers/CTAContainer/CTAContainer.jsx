@@ -4,11 +4,11 @@ import Slider from 'react-slick';
 
 import Cards from '../../components/Cards/Cards';
 
-
 class CTAContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.renderOfferList = this.renderOfferList.bind(this);
   }
 
   renderOfferList() {
@@ -39,12 +39,15 @@ class CTAContainer extends React.Component {
       accessibility: true,
       adaptiveHeight: true,
     };
+
     const offerComponents = this.renderOfferList();
     if (offerComponents.length > 0) {
       return (
-        <Slider {...settings}>
-          {offerComponents}
-        </Slider>
+        <div>
+          <Slider {...settings}>
+            {offerComponents}
+          </Slider>
+        </div>
       )
     } else {
       return null;

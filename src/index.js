@@ -11,8 +11,7 @@ const renderPoint = document.createElement('div', { id: `render-recoop-${1}`});
 renderPoint.setAttribute('id', 'render-recoop-1');
 document.body.appendChild(renderPoint);
 // to render in prod
-render(
+ReactDOM.render(
   <BaseContainer />,
   document.getElementById('render-recoop-1')
 );
-export { default as Modal } from './components/Modal/Modal';

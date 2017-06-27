@@ -16,7 +16,7 @@ class BaseContainer extends React.Component {
 
     this.state = {
       isLoading: true,
-      hidden: false,
+      hidden: true,
       resetNonce: false,
       clientId: 1,
       offers: [],
@@ -29,7 +29,6 @@ class BaseContainer extends React.Component {
       email: '',
       phone: '',
       clientToken: '',
-      isLoading: true,
       isFinePrintVisible: false
     };
 
@@ -39,6 +38,7 @@ class BaseContainer extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSelectOffer = this.handleSelectOffer.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
 
     analytics.page();
   }
@@ -54,14 +54,30 @@ class BaseContainer extends React.Component {
 
     getOffers(this.state.clientId)
       .then((data) => {
-        console.log('offer Fetched', data);
         this.setState({
           offers: data,
           totalAmount: (data[0].discounted_value * 1).toFixed(2),
-          isLoading: false
+          isLoading: false,
+          hidden: false
         });
       })
       .catch(console.warn);
+
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress(e) {
+    if (e.keyCode === 27) {
+      this.handleClose(e);
+    } else if (e.keyCode === 13) {
+      this.handleContinue(e);
+    } else if (e.keyCode === 8) {
+      this.handleStepBack(e);
+    }
   }
 
   handleContinue(e) {
@@ -97,9 +113,11 @@ class BaseContainer extends React.Component {
   }
 
   handleStepBack(e) {
-    this.setState({
-      step: this.state.step - 1
-    });
+    if (this.state.step > 1) {
+      this.setState({
+        step: this.state.step - 1
+      });
+    }
   }
 
   handleSelect(e) {
@@ -179,41 +197,43 @@ class BaseContainer extends React.Component {
   }
 
   renderModal() {
-    if (this.state.hidden) {
-      return (
-        <Button
-          size="small"
-          color="orange"
-          type="normal"
-          classNames="coup-Button--fixed"
-          text="View Exclusive Offers"
-          onClick={() => {
-            return this.setState({
-              hidden: false
-            });
-          }}
-        />
-      );
-    }
     const renderedContent = this.renderContent();
     const progress = (this.state.step / 4) * 100;
     const barStyle = {
       width: `${progress}%`
     };
     return (
-      <Modal
-        open={!this.state.hidden && !this.state.isLoading}
-        onClose={this.handleClose}
-        size="small"
-      >
-        <div
-          className="ui tiny active indicating progress"
-          data-percent={progress}
+      <div>
+        <Modal
+          open={!this.state.hidden && !this.state.isLoading}
+          onClose={this.handleClose}
+          size="small"
         >
-          <div className="bar" style={barStyle} />
-        </div>
-        {renderedContent}
-      </Modal>
+          <div
+            className="ui tiny active indicating progress"
+            data-percent={progress}
+          >
+            <div className="bar" style={barStyle} />
+          </div>
+          {renderedContent}
+        </Modal>
+        {(this.state.hidden) &&
+          (
+            <Button
+              size="small"
+              color="orange"
+              type="normal"
+              classNames="coup-Button--fixed"
+              text="View Exclusive Offers"
+              onClick={() => {
+                return this.setState({
+                  hidden: false
+                });
+              }}
+            />
+          )
+        }
+      </div>
     );
   }
 

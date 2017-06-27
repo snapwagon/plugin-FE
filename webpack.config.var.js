@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 var CompressionPlugin = require('compression-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entry = path.join(__dirname, 'src');
 const output = path.join(__dirname, 'dist');
@@ -8,6 +9,11 @@ const output = path.join(__dirname, 'dist');
 const plugins = [];
 
 if (process.env.MINIFY) {
+  // plugins.push(new HtmlWebpackPlugin({
+  //   title: 'My App',
+  //   filename: 'assets/test.html'
+  // }));
+
   plugins.push(new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('production'),
@@ -25,7 +31,7 @@ if (process.env.MINIFY) {
         test: /\.js$|\.css$|\.html$/,
         threshold: 10240,
         minRatio: 0.8
-      }))
+      }));
 }
 
 module.exports = {
@@ -52,6 +58,10 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.(eot|svg|ttf|woff|woff2|gif)$/,
+        loader: 'file-loader?name=public/fonts/[name].[ext]'
+      },
+      {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
       },
@@ -59,7 +69,7 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /(node_modules)/,
-      },
+      }
     ]
   },
   plugins,

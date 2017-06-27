@@ -3,11 +3,13 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 const Image = (props) => (
-  <img
-    alt={props.alt}
-    className={classNames('coup-Image', props.classNames)}
-    src={props.src}
-    width={props.width}
+  <div
+    aria-label={props.alt}
+    className="coup-Thumbnail"
+    style={{
+      backgroundImage: `url(${props.src})`
+    }}
+    role="img"
   />
 );
 

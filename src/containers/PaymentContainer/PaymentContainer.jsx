@@ -103,7 +103,6 @@ class PaymentContainer extends React.Component {
           return handleComplete();
         })
         .catch((error) => {
-          debugger;
           return handleError(error);
         });
       });

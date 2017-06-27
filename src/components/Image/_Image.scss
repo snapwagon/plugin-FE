@@ -1,3 +1,11 @@
 .coup-Image {
   box-sizing: content-box;
 }
+
+.coup-Thumbnail {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex: 1;
+}
