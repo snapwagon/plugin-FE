@@ -19,9 +19,26 @@ class PaymentContainer extends React.Component {
 
     this.handleValidate = this.handleValidate.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress(e) {
+    // escape
+    if (e.keyCode === 27) {
+      this.props.handleClose(e);
+    // enter
+    } else if (e.keyCode === 13) {
+      this.handleValidate(e);
+    }
   }
 
   componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+
     braintree.create({
       authorization: this.props.clientToken,
       selector: '#dropin-container'
@@ -40,16 +57,6 @@ class PaymentContainer extends React.Component {
         });
       }
     });
-  }
-
-  componentWillUnmount() {
-    // hostedFieldsInstance.teardown(function (err) {
-    //   if (err) {
-    //     console.error('Could not tear down Hosted Fields!');
-    //   } else {
-    //     console.log('Hosted Fields has been torn down!');
-    //   }
-    // });
   }
 
   handleValidate(e) {
@@ -126,19 +133,21 @@ class PaymentContainer extends React.Component {
             'dropin-container--hidden': this.state.isLoading
           })}
         />
-        <Button
-          id="back-button"
-          text="Back"
-          size="small"
-          onClick={this.handleReturn}
-        />
-        <Button
-          id="submit-button"
-          text="Purchase"
-          size="small"
-          onClick={this.handleValidate}
-          isLoading={this.state.isLoading}
-        />
+        <div className="snapW-form-flex-group snapW-form-flex-group--right">
+          <Button
+            id="back-button"
+            text="Back"
+            size="small"
+            onClick={this.handleReturn}
+          />
+          <Button
+            id="submit-button"
+            text="Purchase"
+            size="small"
+            onClick={this.handleValidate}
+            isLoading={this.state.isLoading}
+          />
+        </div>
       </div>
     );
   }

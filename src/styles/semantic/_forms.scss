@@ -23,14 +23,6 @@
   clear: both;
   margin: 0em 0em 1em;
 }
-.ui.form .field:last-child,
-.ui.form .fields:last-child .field {
-  margin-bottom: 0em;
-}
-.ui.form .fields .field {
-  clear: both;
-  // margin: 0em;
-}
 
 /*--------------------
         Labels
@@ -811,15 +803,15 @@
   min-height: 258px;
 }
 
-.coup-form {
+.snapW-form {
   margin: 8px;
 }
 
-.coup-subtitle + .coup-subtitle {
+.snapW-subtitle + .snapW-subtitle {
   margin-left: 10px;
 }
 
-.coup-form-flex-group {
+.snapW-form-flex-group {
   display: flex;
   flex: 1 0 100%;
   flex-wrap: wrap;
@@ -833,9 +825,13 @@
       justify-content: space-between;
     }
   }
+
+  &--right {
+    justify-content: flex-end;
+  }
 }
 
-.coup-input-third {
+.snapW-input-third {
   flex: 1;
 
   /* Swap to full width on mobile */
@@ -846,7 +842,7 @@
 }
 
 
-.field.coup-input-third .ui.input {
+.field.snapW-input-third .ui.input {
   width: 83%;
 
   /* Swap to full width on mobile */
@@ -857,29 +853,29 @@
 
 
 
-.coup-field-descriptiion {
+.snapW-field-descriptiion {
   min-width: min-content;
 }
 
-.coup-quantity {
+.snapW-quantity {
   text-align: center;
 }
 
-.coup-main-text {
+.snapW-main-text {
   font-weight: $regular;
   margin: 5px 0 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.coup-subtitle {
+.snapW-subtitle {
   font-size: 12px;
 }
 
-.coup-field-description {
+.snapW-field-description {
   text-align: center;
 }
 
-.coup-field-left {
+.snapW-field-left {
   text-align: left;
 }

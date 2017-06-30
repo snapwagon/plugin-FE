@@ -19,6 +19,25 @@ class AccountInfoContainer extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress(e) {
+    // escape
+    if (e.keyCode === 27) {
+      this.props.handleClose(e);
+    // enter
+    } else if (e.keyCode === 13) {
+      this.handleValidate(e);
+    }
   }
 
   handleSelect(e) {
@@ -54,19 +73,17 @@ class AccountInfoContainer extends React.Component {
 
   render() {
     return (
-      <div className="ui mini form coup-form">
-        <div className="coup-form-flex-group coup-form-flex-group-info">
-          <div id="form-input-control-description" className="field coup-field-descriptiion">
-            <label htmlFor="coup-offer-description">Description</label>
-            <p id="coup-offer-description" className="coup-main-text">{this.props.offerTitle}</p>
-            <span className="coup-subtitle">Discount: {this.props.offerDiscount}%</span>
-            <span className="coup-subtitle">Value: ${this.props.offerFullValue}</span>
+      <div className="ui mini form snapW-form">
+        <div className="snapW-form-flex-group snapW-form-flex-group-info">
+          <div id="form-input-control-description" className="field snapW-field-descriptiion">
+            <label htmlFor="snapW-offer-description">Description</label>
+            <p id="snapW-offer-description" className="snapW-main-text">{this.props.offerTitle}</p>
+            <span className="snapW-subtitle">Discount: {this.props.offerDiscount}%</span>
+            <span className="snapW-subtitle">Value: ${this.props.offerFullValue}</span>
           </div>
-
-
-          <div id="form-input-control-qty" className="field coup-field-descriptiion">
-            <label htmlFor="coup-select-qty">Qty</label>
-            <select id="coup-select-qty" value={this.props.quantity} name="quantity" onChange={this.handleSelect} className="coup-field-center coup-quantity">
+          <div id="form-input-control-qty" className="field snapW-field-descriptiion">
+            <label htmlFor="snapW-select-qty">Qty</label>
+            <select id="snapW-select-qty" value={this.props.quantity} name="quantity" onChange={this.handleSelect} className="snapW-field-center snapW-quantity">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -75,41 +92,43 @@ class AccountInfoContainer extends React.Component {
             </select>
           </div>
           <div id="form-input-control-offer-amount" className="field">
-            <label htmlFor="coup-offer-amount">Offer $</label>
-            <p id="coup-offer-amount" className="coup-main-text">${this.props.offerAmount}</p>
+            <label htmlFor="snapW-offer-amount">Offer $</label>
+            <p id="snapW-offer-amount" className="snapW-main-text">${this.props.offerAmount}</p>
           </div>
           <div id="form-input-control-total" className="field">
-            <label htmlFor="coup-total-amount">Total</label>
-            <p id="coup-total-amount" className="coup-main-text">${this.props.totalAmount}</p>
+            <label htmlFor="snapW-total-amount">Total</label>
+            <p id="snapW-total-amount" className="snapW-main-text">${this.props.totalAmount}</p>
           </div>
         </div>
 
-        <div className="coup-form-flex-group">
-          <div className={`${this.state.nameError ? 'error' : ''} field coup-input-third`}>
+        <div className="snapW-form-flex-group">
+          <div className={`${this.state.nameError ? 'error' : ''} field snapW-input-third`}>
             <label htmlFor="form-input-control-full-name">Name</label>
             <input id="form-input-control-full-name" label="Name" placeholder="Name" name="name" value={this.props.name} className="ui input" onChange={this.handleInputChange} required />
           </div>
-          <div className={`${this.state.emailError ? 'error' : ''} field coup-input-third`}>
+          <div className={`${this.state.emailError ? 'error' : ''} field snapW-input-third`}>
             <label htmlFor="form-input-control-email">Email</label>
             <input id="form-input-control-email" label="Email" type="email" value={this.props.email} name="email" placeholder="awesomemom@gmail.com" className="ui input" onChange={this.handleInputChange} required />
           </div>
-          <div className="field coup-input-third">
+          <div className="field snapW-input-third">
             <label htmlFor="form-input-control-phone">Phone</label>
             <input id="form-input-control-phone" type="tel" label="Phone" placeholder="Phone" className="ui input" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
           </div>
         </div>
-        <Button
-          id="account-back-button"
-          text="Back"
-          size="small"
-          onClick={this.props.handleStepBack}
-        />
-        <Button
-          id="form-button-control-public"
-          content="Confirm"
-          text="Continue"
-          onClick={this.handleValidate}
-        />
+        <div className="snapW-form-flex-group snapW-form-flex-group--right">
+          <Button
+            id="account-back-button"
+            text="Back"
+            size="small"
+            onClick={this.props.handleStepBack}
+          />
+          <Button
+            id="form-button-control-public"
+            content="Confirm"
+            text="Continue"
+            onClick={this.handleValidate}
+          />
+        </div>
       </div>
     );
   }

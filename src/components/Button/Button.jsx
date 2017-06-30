@@ -5,17 +5,17 @@ import propTypes, { defaultProps } from './props';
 
 const Button = (props) => {
   const classes = {
-    'coup-Button--disabled': props.isDisabled,
+    'snapW-Button--disabled': props.isDisabled,
   };
 
   return (
     <button
       disabled={props.isDisabled}
       className={cx(
-        'coup-Button',
-        `coup-Button--${props.color}`,
-        `coup-Button--${props.type}`,
-        `coup-Button--${props.size}`,
+        'snapW-Button',
+        `snapW-Button--${props.color}`,
+        `snapW-Button--${props.type}`,
+        `snapW-Button--${props.size}`,
         classes,
         props.classNames
       )}
@@ -25,8 +25,8 @@ const Button = (props) => {
       {props.isLoading && (
         <div
           className={cx(
-            `coup-Button--${props.type}--loading`,
-            `coup-Button--${props.size}--loading`,
+            `snapW-Button--${props.type}--loading`,
+            `snapW-Button--${props.size}--loading`,
           )}
         />
       )}

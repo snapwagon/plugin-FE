@@ -2,7 +2,7 @@
 
 exports[`<Cards /> snapshots rendered with props 1`] = `
 <div
-  className="coup-Cards coup-Cards--row"
+  className="snapW-Cards snapW-Cards--row"
 >
   <div>
     Hello?
@@ -12,10 +12,10 @@ exports[`<Cards /> snapshots rendered with props 1`] = `
 
 exports[`<Cards /> snapshots rendered with required props 1`] = `
 <div
-  className="coup-Cards coup-Cards--row"
+  className="snapW-Cards snapW-Cards--row"
 >
   <header
-    className="coup-Header coup-Cards__header"
+    className="snapW-Header snapW-Cards__header"
   >
     Also Available:
   </header>

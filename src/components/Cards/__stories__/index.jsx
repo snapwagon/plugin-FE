@@ -104,7 +104,7 @@ storiesOf('Cards', module).addDecorator((story) => (
 //             tagline={cardData.subText}
 //           />
 //           <Button
-//             classNames="coup-Content--action"
+//             classNames="snapW-Content--action"
 //             color="blue"
 //             text="Select"
 //             type="small"
@@ -158,7 +158,7 @@ storiesOf('Cards', module).addDecorator((story) => (
 //             subtitle={cardData.subTitle}
 //             tagline={cardData.subText}
 //           />
-//           <Button classNames="coup-Content--action" color="blue" text="Select" type="small" />
+//           <Button classNames="snapW-Content--action" color="blue" text="Select" type="small" />
 //         </Section>
 //       </Card>
 //     );
@@ -166,7 +166,7 @@ storiesOf('Cards', module).addDecorator((story) => (
 
 //   return (
 //     <div style={{ width: '300px' }}>
-//       <Cards classNames="coup-Cards--column">
+//       <Cards classNames="snapW-Cards--column">
 //         {children}
 //       </Cards>
 //     </div>

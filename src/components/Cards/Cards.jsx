@@ -21,6 +21,25 @@ class Cards extends React.Component {
 
     this.handleShowFinePrint = this.handleShowFinePrint.bind(this);
     this.handleInterest = this.handleInterest.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress(e) {
+    // escape
+    if (e.keyCode === 27) {
+      this.props.handleClose(e);
+    // enter
+    } else if (e.keyCode === 13) {
+      this.handleInterest(e);
+    }
   }
 
   handleInterest(e) {
@@ -49,8 +68,8 @@ class Cards extends React.Component {
     return (
       <div
         className={cx(
-          'coup-Cards',
-          `coup-Cards--${this.props.orientation}`,
+          'snapW-Cards',
+          `snapW-Cards--${this.props.orientation}`,
           this.props.classNames
         )}
       >
@@ -62,7 +81,7 @@ class Cards extends React.Component {
           {this.props.offer.desc && (
            !this.state.isFinePrintVisible ?
              (<button
-               className={`coup-SubSection--Link--Button`}
+               className={`snapW-SubSection--Link--Button`}
                onClick={this.handleShowFinePrint}
              >
                Fine print...
@@ -70,7 +89,7 @@ class Cards extends React.Component {
              (
                <div
                  dangerouslySetInnerHTML={sanitize(markup)}
-                 className={`coup-SubSection coup-SubSection--${this.state.isFinePrintVisible}`}>
+                 className={`snapW-SubSection snapW-SubSection--${this.state.isFinePrintVisible}`}>
                </div>
              )
            )
@@ -93,7 +112,8 @@ const {
   string,
   oneOf,
   oneOfType,
-  objectOf
+  objectOf,
+  func
 } = PropTypes;
 
 Cards.propTypes = {
@@ -105,10 +125,14 @@ Cards.propTypes = {
     'column',
     'row'
   ]),
+  handleClose: func,
+  handleContinue: func,
   offer: objectOf(node)
 };
 
 Cards.defaultProps = {
+  handleClose() {},
+  handleContinue() {},
   classNames: undefined,
   orientation: 'row',
   offer: {},

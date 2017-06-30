@@ -6,8 +6,8 @@ const Section = (props) => {
   return (
     <div
       className={cx(
-        `coup-Card__${props.type}`,
-        `coup-Card__${props.type}--${props.orientation}`,
+        `snapW-Card__${props.type}`,
+        `snapW-Card__${props.type}--${props.orientation}`,
         props.classNames
       )}
     >

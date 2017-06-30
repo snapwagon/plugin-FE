@@ -2,15 +2,15 @@
 
 exports[`<Content /> snapshots rendered with title and subtitle 1`] = `
 <div
-  className="coup-Content"
+  className="snapW-Content"
 >
   <p
-    className="coup-Content__text coup-Content__title"
+    className="snapW-Content__text snapW-Content__title"
   >
     Food
   </p>
   <p
-    className="coup-Content__text coup-Content__subtitle"
+    className="snapW-Content__text snapW-Content__subtitle"
   >
     Tastes goood
   </p>
@@ -19,20 +19,20 @@ exports[`<Content /> snapshots rendered with title and subtitle 1`] = `
 
 exports[`<Content /> snapshots rendered with title, subtitle and tagline 1`] = `
 <div
-  className="coup-Content"
+  className="snapW-Content"
 >
   <p
-    className="coup-Content__text coup-Content__title"
+    className="snapW-Content__text snapW-Content__title"
   >
     Food
   </p>
   <p
-    className="coup-Content__text coup-Content__subtitle coup-Content__subtitle--is-bold"
+    className="snapW-Content__text snapW-Content__subtitle snapW-Content__subtitle--is-bold"
   >
     Tastes goood
   </p>
   <p
-    className="coup-Content__text coup-Content__tagline"
+    className="snapW-Content__text snapW-Content__tagline"
   >
     yupp
   </p>

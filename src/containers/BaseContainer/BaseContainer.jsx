@@ -38,7 +38,6 @@ class BaseContainer extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSelectOffer = this.handleSelectOffer.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
 
     analytics.page();
   }
@@ -62,29 +61,15 @@ class BaseContainer extends React.Component {
         });
       })
       .catch(console.warn);
-
-    document.addEventListener('keydown', this.handleKeyPress);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyPress);
-  }
-
-  handleKeyPress(e) {
-    if (e.keyCode === 27) {
-      this.handleClose(e);
-    } else if (e.keyCode === 13) {
-      this.handleContinue(e);
-    } else if (e.keyCode === 8) {
-      this.handleStepBack(e);
-    }
   }
 
   handleContinue(e) {
     if (this.state.step < 4) {
-      this.setState({
-        step: this.state.step + 1
-      });
+      if (!this.state.hidden) {
+        this.setState({
+          step: this.state.step + 1
+        });
+      }
     } else {
       this.setState(() => ({
         hidden: true,
@@ -97,6 +82,7 @@ class BaseContainer extends React.Component {
   }
 
   handleSelectOffer(offerId) {
+    if (this.state.hidden) { return; }
     if (this.state.resetNonce) {
       getToken()
         .then((data) => {
@@ -146,6 +132,7 @@ class BaseContainer extends React.Component {
   renderCTA() {
     return (<CallToAction
       handleContinue={this.handleSelectOffer}
+      handleClose={this.handleClose}
       offers={this.state.offers}
       clientId={this.state.clientId}
     />);
@@ -155,6 +142,7 @@ class BaseContainer extends React.Component {
     return (<AccountInfo
       handleContinue={this.handleContinue}
       handleStepBack={this.handleStepBack}
+      handleClose={this.handleClose}
       name={this.state.name}
       email={this.state.email}
       quantity={this.state.quantity}
@@ -174,6 +162,7 @@ class BaseContainer extends React.Component {
     return (<PaymentForm
       handleContinue={this.handleContinue}
       handleStepBack={this.handleStepBack}
+      handleClose={this.handleClose}
       clientToken={this.state.clientToken}
       quantity={this.state.quantity}
       name={this.state.name}
@@ -223,7 +212,7 @@ class BaseContainer extends React.Component {
               size="small"
               color="orange"
               type="normal"
-              classNames="coup-Button--fixed"
+              classNames="snapW-Button--fixed"
               text="View Exclusive Offers"
               onClick={() => {
                 return this.setState({

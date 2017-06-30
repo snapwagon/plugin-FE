@@ -1,8 +1,6 @@
-.coup-Button {
+.snapW-Button {
   position: relative;
-  display: inline-block;
   box-sizing: border-box;
-  display: inline-block;
   border: none;
   border-radius: 0px;
   user-select: none;
@@ -19,24 +17,24 @@
   text-transform: uppercase;
 }
 
-.coup-Button--fixed {
+.snapW-Button--fixed {
   position: fixed;
   bottom: 0;
   right: 5%;
   z-index: 801;
 }
 
-.coup-Button--is-disabled {
+.snapW-Button--is-disabled {
   cursor: initial;
 }
 
-.coup-Button--small {
+.snapW-Button--small {
   line-height: 40px;
   height: 40px;
   padding: 0 28px;
 }
 
-.coup-Button--full {
+.snapW-Button--full {
   display: block;
   width: 100%;
   height: 50px;

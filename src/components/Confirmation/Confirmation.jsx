@@ -5,11 +5,11 @@ import Button from '../../components/Button/Button';
 
 const Confirmation = (props) => {
   return (
-    <div className="coup-Confirmation">
-      <h4 className="coup-Confirmation-title">
+    <div className="snapW-Confirmation">
+      <h4 className="snapW-Confirmation-title">
         {props.confirmationHeader}
       </h4>
-      <p className="coup-Confirmation-text">
+      <p className="snapW-Confirmation-text">
         {props.confirmationMessage}
       </p>
       <Button
@@ -34,7 +34,7 @@ Confirmation.propTypes = {
 Confirmation.defaultProps = {
   handleContinue() {},
   confirmationHeader: 'YOU ROCK!',
-  confirmationMessage: 'Check your email for your voucher and redeem in store.'
+  confirmationMessage: 'Check your email for a voucher and redeem in store.'
 };
 
 export default Confirmation;

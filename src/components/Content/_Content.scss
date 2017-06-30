@@ -1,13 +1,13 @@
-.coup-Content {
+.snapW-Content {
   box-sizing: border-box;
-  padding: 1em 1em 0 1em;
+  padding: 1em;
   margin: 0;
   font-size: $medium;
   overflow: hidden;
   font-family: $lato;
 }
 
-.coup-Content__text {
+.snapW-Content__text {
   display: block;
   margin: 0;
   padding: 0;
@@ -15,28 +15,28 @@
   text-overflow: ellipsis;
 }
 
-.coup-Content__title {
+.snapW-Content__title {
   font-size: 1em;
   font-weight: bold;
   color: $blue;
   line-height: 22px;
 }
 
-.coup-Content__subtitle {
+.snapW-Content__subtitle {
   font-size: 0.875em;
   color: $gray;
 }
 
-.coup-Content__subtitle--is-bold {
+.snapW-Content__subtitle--is-bold {
   font-weight: $med;
 }
 
-.coup-Content__tagline {
+.snapW-Content__tagline {
   font-size: 0.875em;
   color: $gray;
 }
 
-.coup-Card--is-bordered {
+.snapW-Card--is-bordered {
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
   transition: box-shadow 0.3s ease-in-out;
   border: 1px solid #E4E6EB;
@@ -46,7 +46,7 @@
   }
 }
 
-.coup-Card {
+.snapW-Card {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -80,7 +80,7 @@
   }
 }
 
-.coup-Card__Header {
+.snapW-Card__Header {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -92,7 +92,7 @@
   }
 }
 
-.coup-Card__Body {
+.snapW-Card__Body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -103,7 +103,7 @@
   }
 }
 
-.coup-SubSection--Link--Button {
+.snapW-SubSection--Link--Button {
   background-color: inherit;
   border: 0;
   text-align: left;
@@ -113,7 +113,7 @@
   color: $gray;
 }
 
-.coup-SubSection {
+.snapW-SubSection {
   text-align: left;
   margin: 1em;
   font-family: $lato;

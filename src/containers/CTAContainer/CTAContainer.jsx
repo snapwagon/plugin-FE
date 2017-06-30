@@ -21,6 +21,7 @@ class CTAContainer extends React.Component {
               offer={offer}
               clientId={this.props.clientId}
               handleContinue={this.props.handleContinue}
+              handleClose={this.props.handleClose}
               handleShowFinePrint={this.props.handleShowFinePrint}
               isFinePrintVisible={this.props.isFinePrintVisible}
             />
@@ -43,11 +44,10 @@ class CTAContainer extends React.Component {
     const offerComponents = this.renderOfferList();
     if (offerComponents.length > 0) {
       return (
-        <div>
-          <Slider {...settings}>
-            {offerComponents}
-          </Slider>
-        </div>
+        <Slider {...settings}
+        >
+          {offerComponents}
+        </Slider>
       )
     } else {
       return null;
@@ -64,6 +64,7 @@ const {
 
 CTAContainer.propTypes = {
   handleContinue: func,
+  handleClose: func,
   offerTitle: string,
   offerAmount: string,
   offerDiscount: number,
@@ -74,6 +75,7 @@ CTAContainer.propTypes = {
 
 CTAContainer.defaultProps = {
   handleContinue() {},
+  handleClose() {},
   offerTitle: '',
   offerAmount: '',
   offerDiscount: 30,

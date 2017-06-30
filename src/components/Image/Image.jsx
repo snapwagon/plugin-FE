@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Image = (props) => (
   <div
     aria-label={props.alt}
-    className="coup-Thumbnail"
+    className="snapW-Thumbnail"
     style={{
       backgroundImage: `url(${props.src})`
     }}
