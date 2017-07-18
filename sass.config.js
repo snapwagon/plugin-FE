@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 
-const outputFile = path.resolve(__dirname, `assets/recoop${process.env.MINIFY ? '.min' : ''}.css`);
+const outputFile = path.resolve(__dirname, `assets/snapwagon${process.env.MINIFY ? '.min' : ''}.css`);
 const outputStyle = process.env.MINIFY ? 'compressed' : 'expanded';
 
 sass.render({

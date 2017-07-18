@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import toMarkdown from 'to-markdown'
-import marked from 'marked'
+import toMarkdown from 'to-markdown';
+import marked from 'marked';
 
 import { analytics } from '../../utils/utils';
 
@@ -59,14 +59,14 @@ class AccountInfoContainer extends React.Component {
         offerId: this.props.offerId
       });
       return this.props.handleContinue();
-    } else {
-      !this.props.name && this.setState({
-        nameError: true
-      });
-      !this.props.email && this.setState({
-        emailError: true
-      });
     }
+    !this.props.name && this.setState({
+      nameError: true
+    });
+    !this.props.email && this.setState({
+      emailError: true
+    });
+
 
     return null;
   }

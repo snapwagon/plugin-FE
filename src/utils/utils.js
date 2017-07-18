@@ -10,7 +10,7 @@ const parseResponse = (response) => {
 export const analytics = Segment({key: 'kfLYgloGKOIzTjzdQtb3bsMQ5LeOrraY'});
 
 export const getOffer = (offerId) => {
-  return fetch(`http://alacode.org/api/offer/${offerId}/`, {
+  return fetch(`https://snapwagon.io/api/offer/${offerId}/`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -21,7 +21,7 @@ export const getOffer = (offerId) => {
 };
 
 export const getOffers = (clientId) => {
-  return fetch(`http://alacode.org/api/organization/${clientId}/offer/`, {
+  return fetch(`https://snapwagon.io/api/organization/${clientId}/offer/`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -32,7 +32,7 @@ export const getOffers = (clientId) => {
 };
 
 export const getToken = () => {
-  return fetch('http://alacode.org/api/client_token/', {
+  return fetch('https://snapwagon.io/api/client_token/', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -42,10 +42,12 @@ export const getToken = () => {
 };
 
 export const postPayment = (data) => {
-  return fetch('http://alacode.org/api/order/', {
+  return fetch('https://snapwagon.io/api/order/', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      origin: '*'
     },
     body: JSON.stringify(data),
   })

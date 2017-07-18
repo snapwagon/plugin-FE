@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import braintree from 'braintree-web-drop-in';
+import { Elements } from 'react-stripe-elements';
 import cx from 'classnames';
 
 import { postPayment, analytics } from '../../utils/utils';
-import Button from '../../components/Button/Button';
+import PaymentForm from '../../components/PaymentForm/PaymentForm';
 
 class PaymentContainer extends React.Component {
   constructor(props) {
@@ -38,25 +38,6 @@ class PaymentContainer extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyPress);
-
-    braintree.create({
-      authorization: this.props.clientToken,
-      selector: '#dropin-container'
-    }, (createErr, instance) => {
-      if (createErr) {
-       // An error in the create call is likely due to
-       // incorrect configuration values or network issues.
-       // An appropriate error will be shown in the UI.
-        console.error(createErr);
-        this.setState({
-          message: createErr
-        });
-      } else {
-        this.setState({
-          instance
-        });
-      }
-    });
   }
 
   handleValidate(e) {
@@ -121,34 +102,14 @@ class PaymentContainer extends React.Component {
 
   render() {
     return (
-      <div className={`ui form ${this.state.message && 'error'}`} >
-        {this.state.message && (
-          <div className="error">
-            {this.state.message}
-          </div>)
-        }
-        <div
-          id="dropin-container"
-          className={cx('dropin-container', {
-            'dropin-container--hidden': this.state.isLoading
-          })}
+      <Elements>
+        <PaymentForm
+          handleValidate={this.handleValidate}
+          isLoading={this.isLoading}
+          handleReturn={this.handleReturn}
+          message={this.state.message}
         />
-        <div className="snapW-form-flex-group snapW-form-flex-group--right">
-          <Button
-            id="back-button"
-            text="Back"
-            size="small"
-            onClick={this.handleReturn}
-          />
-          <Button
-            id="submit-button"
-            text="Purchase"
-            size="small"
-            onClick={this.handleValidate}
-            isLoading={this.state.isLoading}
-          />
-        </div>
-      </div>
+      </Elements>
     );
   }
 }

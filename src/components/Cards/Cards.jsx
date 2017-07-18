@@ -1,8 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import toMarkdown from 'to-markdown'
-import marked from 'marked'
+import toMarkdown from 'to-markdown';
+import marked from 'marked';
 
 import { analytics } from '../../utils/utils';
 
@@ -17,7 +17,7 @@ class Cards extends React.Component {
 
     this.state = {
       isFinePrintVisible: false
-    }
+    };
 
     this.handleShowFinePrint = this.handleShowFinePrint.bind(this);
     this.handleInterest = this.handleInterest.bind(this);
@@ -53,7 +53,7 @@ class Cards extends React.Component {
   handleShowFinePrint(e) {
     this.setState({
       isFinePrintVisible: true
-    })
+    });
   }
 
   render() {
@@ -62,7 +62,7 @@ class Cards extends React.Component {
 
     const markup = this.props.offer.desc;
     const sanitize = (htmlString) => {
-      return { __html: marked(toMarkdown(htmlString), {sanitize: true})}
+      return { __html: marked(toMarkdown(htmlString), {sanitize: true})};
     };
 
     return (
@@ -77,11 +77,11 @@ class Cards extends React.Component {
           <Image src={this.props.offer.image_url} alt={this.props.offer.title} />
         </Section>
         <Section type="Body">
-          <Content title={this.props.offer.title} subtitle={`ONLY $${this.props.offer.discounted_value}`} tagline={detailLine}/>
+          <Content title={this.props.offer.title} subtitle={`ONLY $${this.props.offer.discounted_value}`} tagline={detailLine} />
           {this.props.offer.desc && (
            !this.state.isFinePrintVisible ?
              (<button
-               className={`snapW-SubSection--Link--Button`}
+               className={'snapW-SubSection--Link--Button'}
                onClick={this.handleShowFinePrint}
              >
                Fine print...
@@ -89,8 +89,8 @@ class Cards extends React.Component {
              (
                <div
                  dangerouslySetInnerHTML={sanitize(markup)}
-                 className={`snapW-SubSection snapW-SubSection--${this.state.isFinePrintVisible}`}>
-               </div>
+                 className={`snapW-SubSection snapW-SubSection--${this.state.isFinePrintVisible}`}
+               />
              )
            )
          }
@@ -103,7 +103,7 @@ class Cards extends React.Component {
       </div>
     );
   }
-};
+}
 
 const {
   arrayOf,

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { StripeProvider } from 'react-stripe-elements';
 import { getOffers, getToken, analytics } from '../../utils/utils';
 
 import CallToAction from '../CTAContainer/CTAContainer';
 import AccountInfo from '../AccountInfoContainer/AccountInfoContainer';
-import PaymentForm from '../PaymentContainer/PaymentContainer';
+import PaymentContainer from '../PaymentContainer/PaymentContainer';
 import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import Confirmation from '../../components/Confirmation/Confirmation';
@@ -29,7 +29,8 @@ class BaseContainer extends React.Component {
       email: '',
       phone: '',
       clientToken: '',
-      isFinePrintVisible: false
+      isFinePrintVisible: false,
+      stripe: null
     };
 
     this.handleContinue = this.handleContinue.bind(this);
@@ -159,17 +160,19 @@ class BaseContainer extends React.Component {
   }
 
   renderPayment() {
-    return (<PaymentForm
-      handleContinue={this.handleContinue}
-      handleStepBack={this.handleStepBack}
-      handleClose={this.handleClose}
-      clientToken={this.state.clientToken}
-      quantity={this.state.quantity}
-      name={this.state.name}
-      email={this.state.email}
-      phone={this.state.phone}
-      offerId={this.state.selectedOffer.id}
-    />);
+    return (
+      <PaymentContainer
+        handleContinue={this.handleContinue}
+        handleStepBack={this.handleStepBack}
+        handleClose={this.handleClose}
+        clientToken={this.state.clientToken}
+        quantity={this.state.quantity}
+        name={this.state.name}
+        email={this.state.email}
+        phone={this.state.phone}
+        offerId={this.state.selectedOffer.id}
+      />
+    );
   }
 
   renderContent() {
@@ -204,7 +207,9 @@ class BaseContainer extends React.Component {
           >
             <div className="bar" style={barStyle} />
           </div>
-          {renderedContent}
+          <StripeProvider apiKey="pk_test_Rnsq7CFeBXrPdwWs3DGZQmH0">
+            {renderedContent}
+          </StripeProvider>
         </Modal>
         {(this.state.hidden) &&
           (

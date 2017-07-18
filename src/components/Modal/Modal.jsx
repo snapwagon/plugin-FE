@@ -13,7 +13,7 @@ const Modal = (props) => {
       />
     </div>
   );
-}
+};
 
 const {
   string,
@@ -30,7 +30,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   open: true,
   onClose() {},
-  size: "small"
+  size: 'small'
 };
 
 export default Modal;

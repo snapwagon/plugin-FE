@@ -44,16 +44,16 @@ class CTAContainer extends React.Component {
     const offerComponents = this.renderOfferList();
     if (offerComponents.length > 0) {
       return (
-        <Slider {...settings}
+        <Slider
+          {...settings}
         >
           {offerComponents}
         </Slider>
-      )
-    } else {
-      return null;
+      );
     }
-  };
-};
+    return null;
+  }
+}
 
 const {
   number,

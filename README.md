@@ -26,18 +26,18 @@ Front end of the ish
 
 ### Prebuilt Script Usage
 
-1. Include the `dist/recoop.js` or `dist/recoop.min.js` file in your project
+1. Include the `dist/snapwagon.js` or `dist/snapwagon.min.js` file in your project
 ```
-<script src="your-path-to/node_modules/recoop-ui/dist/recoop.js"></script>
+<script src="your-path-to/node_modules/snapwagon-ui/dist/snapwagon.js"></script>
 ```
 
-2. Use the global `Recoop` to access the components.
+2. Use the global `snapwagon` to access the components.
 ```javascript
 const MyComponent = function (props) {
   return (
-    <Recoop.Card>
+    <snapwagon.Card>
       <div>Hello?</div>
-    </Recoop.Card>
+    </snapwagon.Card>
   );
 };
 ```
