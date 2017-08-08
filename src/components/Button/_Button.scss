@@ -17,6 +17,10 @@
   text-transform: uppercase;
 }
 
+.snapW-Button + .snapW-Button {
+  margin-right: 0;
+}
+
 .snapW-Button--fixed {
   position: fixed;
   bottom: 0;

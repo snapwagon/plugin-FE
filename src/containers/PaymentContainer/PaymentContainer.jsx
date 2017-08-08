@@ -11,8 +11,7 @@ class PaymentContainer extends React.Component {
     super(props);
 
     this.state = {
-      instance: undefined,
-      isLoading: false,
+      isLoading: true,
       isComplete: false,
       message: undefined
     };
@@ -20,10 +19,20 @@ class PaymentContainer extends React.Component {
     this.handleValidate = this.handleValidate.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleToggleIsLoading = this.handleToggleIsLoading.bind(this);
+    this.handleErrorMessage = this.handleErrorMessage.bind(this);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleToggleIsLoading() {
+    this.setState({isLoading: !this.state.isLoading});
   }
 
   handleKeyPress(e) {
@@ -36,19 +45,19 @@ class PaymentContainer extends React.Component {
     }
   }
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress);
+  handleErrorMessage(e) {
+    this.setState({ message: e})
   }
 
-  handleValidate(e) {
+  handleValidate(token) {
     if (this.state.isComplete) return this.props.handleContinue();
     this.setState({
       isLoading: true
     });
 
     const formData = {
-      sale: {
-        payment_method_nonce: ''
+      charge: {
+        token: token.id
       },
       customer: {
         first_name: this.props.name,
@@ -62,37 +71,23 @@ class PaymentContainer extends React.Component {
       quantity: this.props.quantity
     };
 
-    const handleComplete = () => this.setState({isComplete: true});
-    const handleError = (error) => this.setState({ message: error });
-    // const continueCB = this.props.handleContinue;
-    return this.state.instance &&
-      this.state.instance.requestPaymentMethod((
-        requestPaymentMethodErr, payload) => {
-        if (requestPaymentMethodErr) {
-        // No payment method is available.
-        // An appropriate error will be shown in the UI.
-          console.error(requestPaymentMethodErr);
-          return;
-        }
-        formData.sale.payment_method_nonce = payload.nonce;
+    analytics.track('Checkout Started', {
+      offerId: formData.offer.id,
+      quantity: formData.quantity
+    });
 
-        analytics.track('Checkout Started', {
+    postPayment(formData)
+      .then(() => {
+        analytics.track('Order Completed', {
           offerId: formData.offer.id,
           quantity: formData.quantity
         });
-      // Submit payload.nonce to your server
-        postPayment(formData)
-        .then(() => {
-          analytics.track('Order Completed', {
-            offerId: formData.offer.id,
-            quantity: formData.quantity
-          });
 
-          return handleComplete();
-        })
-        .catch((error) => {
-          return handleError(error);
-        });
+        this.setState({isComplete: true});
+        return this.props.handleContinue();
+      })
+      .catch((error) => {
+        this.setState({ message: error });
       });
   }
 
@@ -105,9 +100,11 @@ class PaymentContainer extends React.Component {
       <Elements>
         <PaymentForm
           handleValidate={this.handleValidate}
-          isLoading={this.isLoading}
+          isLoading={this.props.isLoading}
           handleReturn={this.handleReturn}
           message={this.state.message}
+          toggleIsLoading={this.handleToggleIsLoading}
+          handleErrorMessage={this.handleErrorMessage}
         />
       </Elements>
     );

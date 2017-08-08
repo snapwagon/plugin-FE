@@ -27,7 +27,7 @@ module.exports = {
     'react/jsx-boolean-value': 0,
     'react/no-deprecated': 0,
     'import/extensions': 0,
-
+    'import/no-extraneous-dependencies': 0,
     // TODO:
     // Resolve __mock__ imports before turning this error back on
     'import/no-unresolved': 1

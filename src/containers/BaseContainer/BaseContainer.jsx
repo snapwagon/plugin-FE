@@ -25,9 +25,9 @@ class BaseContainer extends React.Component {
       totalAmount: 1,
       quantity: 1,
       message: '',
-      name: '',
-      email: '',
-      phone: '',
+      name: 'John',
+      email: 'jmyeg@gmail.com',
+      phone: '8046831201',
       clientToken: '',
       isFinePrintVisible: false,
       stripe: null

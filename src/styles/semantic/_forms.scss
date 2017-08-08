@@ -356,6 +356,11 @@
 /* On Form */
 .ui.form.error .error.message:not(:empty) {
   display: block;
+  color: #fa755a;
+  border: 1px solid #fa755a;
+  padding: 4px;
+  font-size: .8rem;
+  padding-top: 16px;
 }
 .ui.form.error .compact.error.message:not(:empty) {
   display: inline-block;
@@ -740,36 +745,36 @@
 }
 
 /* Swap to full width on mobile */
-// @media only screen and (max-width: 767px) {
-//   .ui.form .two.fields > .fields,
-//   .ui.form .two.fields > .field,
-//   .ui.form .three.fields > .fields,
-//   .ui.form .three.fields > .field,
-//   .ui.form .four.fields > .fields,
-//   .ui.form .four.fields > .field,
-//   .ui.form .five.fields > .fields,
-//   .ui.form .five.fields > .field,
-//   .ui.form .fields > .two.wide.field,
-//   .ui.form .fields > .three.wide.field,
-//   .ui.form .fields > .four.wide.field,
-//   .ui.form .fields > .five.wide.field,
-//   .ui.form .fields > .six.wide.field,
-//   .ui.form .fields > .seven.wide.field,
-//   .ui.form .fields > .eight.wide.field,
-//   .ui.form .fields > .nine.wide.field,
-//   .ui.form .fields > .ten.wide.field,
-//   .ui.form .fields > .eleven.wide.field,
-//   .ui.form .fields > .twelve.wide.field,
-//   .ui.form .fields > .thirteen.wide.field,
-//   .ui.form .fields > .fourteen.wide.field,
-//   .ui.form .fields > .fifteen.wide.field,
-//   .ui.form .fields > .sixteen.wide.field {
-//     width: 100% !important;
-//   }
-//   .ui.form .fields {
-//     margin-bottom: .5em;
-//   }
-// }
+@media only screen and (max-width: 767px) {
+  .ui.form .two.fields > .fields,
+  .ui.form .two.fields > .field,
+  .ui.form .three.fields > .fields,
+  .ui.form .three.fields > .field,
+  .ui.form .four.fields > .fields,
+  .ui.form .four.fields > .field,
+  .ui.form .five.fields > .fields,
+  .ui.form .five.fields > .field,
+  .ui.form .fields > .two.wide.field,
+  .ui.form .fields > .three.wide.field,
+  .ui.form .fields > .four.wide.field,
+  .ui.form .fields > .five.wide.field,
+  .ui.form .fields > .six.wide.field,
+  .ui.form .fields > .seven.wide.field,
+  .ui.form .fields > .eight.wide.field,
+  .ui.form .fields > .nine.wide.field,
+  .ui.form .fields > .ten.wide.field,
+  .ui.form .fields > .eleven.wide.field,
+  .ui.form .fields > .twelve.wide.field,
+  .ui.form .fields > .thirteen.wide.field,
+  .ui.form .fields > .fourteen.wide.field,
+  .ui.form .fields > .fifteen.wide.field,
+  .ui.form .fields > .sixteen.wide.field {
+    width: 100% !important;
+  }
+  .ui.form .fields {
+    margin-bottom: .5em;
+  }
+}
 
 /*--------------------
      Equal Width
@@ -800,7 +805,11 @@
       Custom
 -------------------------*/
 .dropin-container {
-  min-height: 258px;
+  min-height: 178px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 16px;
 }
 
 .snapW-form {
@@ -878,4 +887,25 @@
 
 .snapW-field-left {
   text-align: left;
+}
+
+.snapW-stripe--container {
+  border: 1px solid $lightGray;
+  margin: 16px 0;
+}
+
+.StripeElement {
+  background-color: white;
+  font-family: $lato;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }
