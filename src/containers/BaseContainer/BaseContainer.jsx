@@ -10,6 +10,8 @@ import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import Confirmation from '../../components/Confirmation/Confirmation';
 
+const STRIPE_PUB = "pk_live_HDp5l3vGgissfUpWLRUI8Gw5";
+
 class BaseContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -25,9 +27,9 @@ class BaseContainer extends React.Component {
       totalAmount: 1,
       quantity: 1,
       message: '',
-      name: 'John',
-      email: 'jmyeg@gmail.com',
-      phone: '8046831201',
+      name: '',
+      email: '',
+      phone: '',
       clientToken: '',
       isFinePrintVisible: false,
       stripe: null
@@ -207,7 +209,7 @@ class BaseContainer extends React.Component {
           >
             <div className="bar" style={barStyle} />
           </div>
-          <StripeProvider apiKey="pk_test_Rnsq7CFeBXrPdwWs3DGZQmH0">
+          <StripeProvider apiKey={STRIPE_PUB}>
             {renderedContent}
           </StripeProvider>
         </Modal>

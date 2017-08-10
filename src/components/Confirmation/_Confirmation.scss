@@ -1,12 +1,14 @@
 .snapW-Confirmation {
   font-family: $lato;
   text-align: center;
+  margin: 16px;
 }
 
 .snapW-Confirmation-title {
   font-size: 54px;
   font-weight: $bold;
-  margin: 16px;
+  margin: 0 16px 16px;
+
 }
 
 .snapW-Confirmation-text {

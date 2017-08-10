@@ -37,10 +37,12 @@ class PaymentForm extends React.Component {
   handleSubmit(ev) {
     ev.preventDefault();
     this.saving = true;
+    this.props.toggleIsLoading();
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
     this.props.stripe.createToken().then(({token, error}) => {
       this.saving = false;
+      this.props.toggleIsLoading();
       if (token) {
         this.props.handleValidate(token);
       } else {

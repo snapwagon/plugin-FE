@@ -357,10 +357,7 @@
 .ui.form.error .error.message:not(:empty) {
   display: block;
   color: #fa755a;
-  border: 1px solid #fa755a;
-  padding: 4px;
   font-size: .8rem;
-  padding-top: 16px;
 }
 .ui.form.error .compact.error.message:not(:empty) {
   display: inline-block;
@@ -805,7 +802,7 @@
       Custom
 -------------------------*/
 .dropin-container {
-  min-height: 178px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -822,7 +819,6 @@
 
 .snapW-form-flex-group {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   justify-content: space-between;
   @media only screen and (max-width: 767px) {
@@ -832,6 +828,10 @@
   &-info {
     @media only screen and (max-width: 767px) {
       justify-content: space-between;
+    }
+
+    .field + .field {
+      margin-left: 1em; 
     }
   }
 
@@ -891,7 +891,6 @@
 
 .snapW-stripe--container {
   border: 1px solid $lightGray;
-  margin: 16px 0;
 }
 
 .StripeElement {
