@@ -20,7 +20,7 @@ class BaseContainer extends React.Component {
       isLoading: true,
       hidden: true,
       resetNonce: false,
-      clientId: 1,
+      clientId: 2,
       offers: [],
       selectedOffer: { },
       step: 1,
@@ -46,14 +46,6 @@ class BaseContainer extends React.Component {
   }
 
   componentDidMount() {
-    getToken()
-      .then((data) => {
-        this.setState({
-          clientToken: data.token
-        });
-      })
-      .catch(console.warn);
-
     getOffers(this.state.clientId)
       .then((data) => {
         this.setState({

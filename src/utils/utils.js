@@ -31,16 +31,6 @@ export const getOffers = (clientId) => {
   .then(parseResponse);
 };
 
-export const getToken = () => {
-  return fetch('https://snapwagon.io/api/client_token/', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  })
-  .then(parseResponse);
-};
-
 export const postPayment = (data) => {
   return fetch('https://snapwagon.io/api/order/', {
     method: 'POST',

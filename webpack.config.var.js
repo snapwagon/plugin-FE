@@ -13,7 +13,6 @@ if (process.env.MINIFY) {
   //   title: 'My App',
   //   filename: 'assets/test.html'
   // }));
-
   plugins.push(new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('production'),
