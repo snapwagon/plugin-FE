@@ -196,7 +196,7 @@ class BaseContainer extends React.Component {
           size="small"
         >
           <div
-            className="ui tiny active indicating progress"
+            className="snapW-ui tiny active indicating progress"
             data-percent={progress}
           >
             <div className="bar" style={barStyle} />
@@ -209,9 +209,8 @@ class BaseContainer extends React.Component {
           (
             <Button
               size="small"
-              color="orange"
               type="normal"
-              classNames="snapW-Button--fixed"
+              classNames="snapW-Button--fixed snapW-Button--cookie_rush"
               text="View Exclusive Offers"
               onClick={() => {
                 return this.setState({

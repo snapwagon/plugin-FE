@@ -16,7 +16,7 @@ class Cards extends React.Component {
     super(props);
 
     this.state = {
-      isFinePrintVisible: false
+      isFinePrintVisible: true
     };
 
     this.handleShowFinePrint = this.handleShowFinePrint.bind(this);
@@ -97,7 +97,8 @@ class Cards extends React.Component {
           <Button
             onClick={this.handleInterest}
             size="small"
-            text={`Save $${savingsAmt}!`}
+            text={`Buy Now`}
+            classNames="snapW-Button--cookie_rush"
           />
         </Section>
       </div>

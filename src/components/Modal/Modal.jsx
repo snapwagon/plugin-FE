@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const Modal = (props) => {
   return (
     <div>
-      <div className={`ui small ${props.open ? 'active' : ''} modal`}>
+      <div className={`snapW-ui small ${props.open ? 'active' : ''} modal`}>
         {props.children}
       </div>
       <div
-        className={`ui page ${props.open ? 'visible' : ''} dimmer`}
+        className={`snapW-ui page ${props.open ? 'visible' : ''} dimmer`}
         onClick={props.onClose}
       />
     </div>

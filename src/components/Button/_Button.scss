@@ -1,7 +1,7 @@
 .snapW-Button {
   position: relative;
   box-sizing: border-box;
-  border: none;
+  border: 1px solid $lighterGrayNav;
   border-radius: 0px;
   user-select: none;
   text-align: center;
@@ -15,6 +15,7 @@
   font-size: $medium;
   margin: 5px;
   text-transform: uppercase;
+  background-color: $lightGray;
 }
 
 .snapW-Button + .snapW-Button {
@@ -45,12 +46,19 @@
   margin: 0;
 }
 
-.ui[class*="right labeled"].icon.button {
+.snapW-ui[class*="right labeled"].icon.button {
   padding-right: 4.07142857em!important;
   padding-left: 1.5em!important;
 }
 
-.ui.positive.button, .ui.positive.buttons .button {
+.snapW-Button--positive {
   background-color: #21BA45;
   color: #FFF;
+  border: 1px solid #21BA45;
+}
+
+.snapW-Button--cookie_rush {
+  background-color: #c12526;
+  color: #dbcb9e;
+  border: 1px solid #dbcb9e;
 }

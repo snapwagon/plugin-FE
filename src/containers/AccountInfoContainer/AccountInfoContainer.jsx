@@ -73,7 +73,7 @@ class AccountInfoContainer extends React.Component {
 
   render() {
     return (
-      <div className="ui mini form snapW-form">
+      <div className="snapW-ui mini form snapW-form">
         <div className="snapW-form-flex-group snapW-form-flex-group-info">
           <div id="form-input-control-description" className="field snapW-field-descriptiion">
             <label htmlFor="snapW-offer-description">Description</label>
@@ -104,15 +104,15 @@ class AccountInfoContainer extends React.Component {
         <div className="snapW-form-flex-group">
           <div className={`${this.state.nameError ? 'error' : ''} field snapW-input-third`}>
             <label htmlFor="form-input-control-full-name">Name</label>
-            <input id="form-input-control-full-name" label="Name" placeholder="Name" name="name" value={this.props.name} className="ui input" onChange={this.handleInputChange} required />
+            <input id="form-input-control-full-name" label="Name" placeholder="Name" name="name" value={this.props.name} className="snapW-ui input" onChange={this.handleInputChange} required />
           </div>
           <div className={`${this.state.emailError ? 'error' : ''} field snapW-input-third`}>
             <label htmlFor="form-input-control-email">Email</label>
-            <input id="form-input-control-email" label="Email" type="email" value={this.props.email} name="email" placeholder="awesomemom@gmail.com" className="ui input" onChange={this.handleInputChange} required />
+            <input id="form-input-control-email" label="Email" type="email" value={this.props.email} name="email" placeholder="awesomemom@gmail.com" className="snapW-ui input" onChange={this.handleInputChange} required />
           </div>
           <div className="field snapW-input-third">
             <label htmlFor="form-input-control-phone">Phone</label>
-            <input id="form-input-control-phone" type="tel" label="Phone" placeholder="Phone" className="ui input" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
+            <input id="form-input-control-phone" type="tel" label="Phone" placeholder="Phone" className="snapW-ui input" name="phone" onChange={this.handleInputChange} value={this.props.phone} />
           </div>
         </div>
         <div className="snapW-form-flex-group snapW-form-flex-group--right">

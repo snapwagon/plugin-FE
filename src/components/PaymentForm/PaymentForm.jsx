@@ -53,7 +53,7 @@ class PaymentForm extends React.Component {
 
   render() {
     const formClasses = cx({
-      ui: true,
+      'snapW-ui': true,
       loading: this.props.isLoading,
       form: true,
       error: this.props.message,
@@ -94,6 +94,7 @@ class PaymentForm extends React.Component {
             size="small"
             onClick={this.handleSubmit}
             isLoading={this.props.isLoading}
+            classNames="snapW-Button--positive"
           />
         </div>
       </div>

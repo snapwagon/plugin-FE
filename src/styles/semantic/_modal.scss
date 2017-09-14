@@ -2,12 +2,12 @@
              Modal
 *******************************/
 
-.ui.page.visible.dimmer {
+.snapW-ui.page.visible.dimmer {
   display: block;
   opacity: 0.7;
 }
 
-.ui.page.dimmer {
+.snapW-ui.page.dimmer {
   position: fixed;
   display: block;
   height: 100%;
@@ -20,7 +20,7 @@
   background: #000;
 }
 
-.ui.modal {
+.snapW-ui.modal {
   position: fixed;
   z-index: 1001;
   top: -170%;
@@ -36,12 +36,12 @@
   will-change: top, left, margin, transform, opacity;
 
 }
-.ui.modal > :first-child:not(.icon),
-.ui.modal > .icon:first-child + * {
+.snapW-ui.modal > :first-child:not(.icon),
+.snapW-ui.modal > .icon:first-child + * {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.ui.modal > :last-child {
+.snapW-ui.modal > :last-child {
   border-bottom-left-radius: 0.28571429rem;
   border-bottom-right-radius: 0.28571429rem;
 }
@@ -55,7 +55,7 @@
      Close
 ---------------*/
 
-.ui.modal > .close {
+.snapW-ui.modal > .close {
   cursor: pointer;
   position: absolute;
   top: -2.5rem;
@@ -68,7 +68,7 @@
   height: 2.25rem;
   padding: 0.625rem 0rem 0rem 0rem;
 }
-.ui.modal > .close:hover {
+.snapW-ui.modal > .close:hover {
   opacity: 1;
 }
 
@@ -76,7 +76,7 @@
      Content
 ---------------*/
 
-.ui.modal > .content {
+.snapW-ui.modal > .content {
   display: block;
   width: 100%;
   font-size: 1em;
@@ -84,7 +84,7 @@
   padding: 1.5rem;
   background: #FFFFFF;
 }
-.ui.modal > .image.content {
+.snapW-ui.modal > .image.content {
   display: flex;
   flex-direction: row;
 }
@@ -93,7 +93,7 @@
              States
 *******************************/
 
-.ui.active.modal {
+.snapW-ui.active.modal {
   display: block;
   top: 15%;
 }
@@ -107,42 +107,42 @@
       Size
 ---------------*/
 
-.ui.modal {
+.snapW-ui.modal {
   font-size: 1rem;
 }
 
 /* Small */
-.ui.small.modal > .header:not(.ui) {
+.snapW-ui.small.modal > .header:not(.snapW-ui) {
   font-size: 1.3em;
 }
 
 /* Small Modal Width */
 @media only screen and (max-width: 667px) {
-  .ui.small.modal {
+  .snapW-ui.small.modal {
     width: 97.4%;
     margin: 0em 0em 0em -47.5%;
   }
 }
 @media only screen and (min-width: 668px) {
-  .ui.small.modal {
+  .snapW-ui.small.modal {
     width: 60.4%;
     margin: 0em 0em 0em -29.2%;
   }
 }
 @media only screen and (min-width: 992px) {
-  .ui.small.modal {
+  .snapW-ui.small.modal {
     width: 550px;
     margin: 0em 0em 0em -340px;
   }
 }
 @media only screen and (min-width: 1200px) {
-  .ui.small.modal {
+  .snapW-ui.small.modal {
     width: 620px;
     margin: 0em 0em 0em -360px;
   }
 }
 @media only screen and (min-width: 1920px) {
-  .ui.small.modal {
+  .snapW-ui.small.modal {
     width: 660px;
     margin: 0em 0em 0em -380px;
   }

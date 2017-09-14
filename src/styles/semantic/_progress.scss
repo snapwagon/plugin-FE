@@ -2,7 +2,7 @@
             Progress
 *******************************/
 
-.ui.progress {
+.snapW-ui.progress {
   position: relative;
   display: block;
   max-width: 100%;
@@ -19,7 +19,7 @@
 
 
 /* Activity Bar */
-.ui.progress .bar {
+.snapW-ui.progress .bar {
   display: block;
   line-height: 1;
   position: relative;
@@ -31,7 +31,7 @@
 }
 
 /* Percent Complete */
-.ui.progress .bar > .progress {
+.snapW-ui.progress .bar > .progress {
   white-space: nowrap;
   position: absolute;
   width: auto;
@@ -48,7 +48,7 @@
 }
 
 /* Label */
-.ui.progress > .label {
+.snapW-ui.progress > .label {
   position: absolute;
   width: 100%;
   font-size: 1em;
@@ -72,79 +72,79 @@
 
 
 /* Indicating */
-.ui.indicating.progress[data-percent^="1"] .bar,
-.ui.indicating.progress[data-percent^="2"] .bar {
+.snapW-ui.indicating.progress[data-percent^="1"] .bar,
+.snapW-ui.indicating.progress[data-percent^="2"] .bar {
   background-color: #D95C5C;
 }
-.ui.indicating.progress[data-percent^="3"] .bar {
+.snapW-ui.indicating.progress[data-percent^="3"] .bar {
   background-color: #EFBC72;
 }
-.ui.indicating.progress[data-percent^="4"] .bar,
-.ui.indicating.progress[data-percent^="5"] .bar {
+.snapW-ui.indicating.progress[data-percent^="4"] .bar,
+.snapW-ui.indicating.progress[data-percent^="5"] .bar {
   background-color: #E6BB48;
 }
-.ui.indicating.progress[data-percent^="6"] .bar {
+.snapW-ui.indicating.progress[data-percent^="6"] .bar {
   background-color: #DDC928;
 }
-.ui.indicating.progress[data-percent^="7"] .bar,
-.ui.indicating.progress[data-percent^="8"] .bar {
+.snapW-ui.indicating.progress[data-percent^="7"] .bar,
+.snapW-ui.indicating.progress[data-percent^="8"] .bar {
   background-color: #B4D95C;
 }
-.ui.indicating.progress[data-percent^="9"] .bar,
-.ui.indicating.progress[data-percent^="100"] .bar {
+.snapW-ui.indicating.progress[data-percent^="9"] .bar,
+.snapW-ui.indicating.progress[data-percent^="100"] .bar {
   background-color: #66DA81;
 }
 
 /* Indicating Label */
-.ui.indicating.progress[data-percent^="1"] .label,
-.ui.indicating.progress[data-percent^="2"] .label {
+.snapW-ui.indicating.progress[data-percent^="1"] .label,
+.snapW-ui.indicating.progress[data-percent^="2"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
-.ui.indicating.progress[data-percent^="3"] .label {
+.snapW-ui.indicating.progress[data-percent^="3"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
-.ui.indicating.progress[data-percent^="4"] .label,
-.ui.indicating.progress[data-percent^="5"] .label {
+.snapW-ui.indicating.progress[data-percent^="4"] .label,
+.snapW-ui.indicating.progress[data-percent^="5"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
-.ui.indicating.progress[data-percent^="6"] .label {
+.snapW-ui.indicating.progress[data-percent^="6"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
-.ui.indicating.progress[data-percent^="7"] .label,
-.ui.indicating.progress[data-percent^="8"] .label {
+.snapW-ui.indicating.progress[data-percent^="7"] .label,
+.snapW-ui.indicating.progress[data-percent^="8"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
-.ui.indicating.progress[data-percent^="9"] .label,
-.ui.indicating.progress[data-percent^="100"] .label {
+.snapW-ui.indicating.progress[data-percent^="9"] .label,
+.snapW-ui.indicating.progress[data-percent^="100"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
 
 /* Single Digits */
-.ui.indicating.progress[data-percent="1"] .bar,
-.ui.indicating.progress[data-percent="2"] .bar,
-.ui.indicating.progress[data-percent="3"] .bar,
-.ui.indicating.progress[data-percent="4"] .bar,
-.ui.indicating.progress[data-percent="5"] .bar,
-.ui.indicating.progress[data-percent="6"] .bar,
-.ui.indicating.progress[data-percent="7"] .bar,
-.ui.indicating.progress[data-percent="8"] .bar,
-.ui.indicating.progress[data-percent="9"] .bar {
+.snapW-ui.indicating.progress[data-percent="1"] .bar,
+.snapW-ui.indicating.progress[data-percent="2"] .bar,
+.snapW-ui.indicating.progress[data-percent="3"] .bar,
+.snapW-ui.indicating.progress[data-percent="4"] .bar,
+.snapW-ui.indicating.progress[data-percent="5"] .bar,
+.snapW-ui.indicating.progress[data-percent="6"] .bar,
+.snapW-ui.indicating.progress[data-percent="7"] .bar,
+.snapW-ui.indicating.progress[data-percent="8"] .bar,
+.snapW-ui.indicating.progress[data-percent="9"] .bar {
   background-color: #D95C5C;
 }
-.ui.indicating.progress[data-percent="1"] .label,
-.ui.indicating.progress[data-percent="2"] .label,
-.ui.indicating.progress[data-percent="3"] .label,
-.ui.indicating.progress[data-percent="4"] .label,
-.ui.indicating.progress[data-percent="5"] .label,
-.ui.indicating.progress[data-percent="6"] .label,
-.ui.indicating.progress[data-percent="7"] .label,
-.ui.indicating.progress[data-percent="8"] .label,
-.ui.indicating.progress[data-percent="9"] .label {
+.snapW-ui.indicating.progress[data-percent="1"] .label,
+.snapW-ui.indicating.progress[data-percent="2"] .label,
+.snapW-ui.indicating.progress[data-percent="3"] .label,
+.snapW-ui.indicating.progress[data-percent="4"] .label,
+.snapW-ui.indicating.progress[data-percent="5"] .label,
+.snapW-ui.indicating.progress[data-percent="6"] .label,
+.snapW-ui.indicating.progress[data-percent="7"] .label,
+.snapW-ui.indicating.progress[data-percent="8"] .label,
+.snapW-ui.indicating.progress[data-percent="9"] .label {
   color: rgba(0, 0, 0, 0.87);
 }
 
 /* Indicating Success */
-.ui.indicating.progress.success .label {
+.snapW-ui.indicating.progress.success .label {
   color: #1A531B;
 }
 
@@ -158,14 +158,14 @@
      Success
 ---------------*/
 
-.ui.progress.success .bar {
+.snapW-ui.progress.success .bar {
   background-color: #21BA45 !important;
 }
-.ui.progress.success .bar,
-.ui.progress.success .bar::after {
+.snapW-ui.progress.success .bar,
+.snapW-ui.progress.success .bar::after {
           animation: none !important;
 }
-.ui.progress.success > .label {
+.snapW-ui.progress.success > .label {
   color: #1A531B;
 }
 
@@ -173,14 +173,14 @@
      Warning
 ---------------*/
 
-.ui.progress.warning .bar {
+.snapW-ui.progress.warning .bar {
   background-color: #F2C037 !important;
 }
-.ui.progress.warning .bar,
-.ui.progress.warning .bar::after {
+.snapW-ui.progress.warning .bar,
+.snapW-ui.progress.warning .bar::after {
   animation: none !important;
 }
-.ui.progress.warning > .label {
+.snapW-ui.progress.warning > .label {
   color: #794B02;
 }
 
@@ -188,14 +188,14 @@
      Error
 ---------------*/
 
-.ui.progress.error .bar {
+.snapW-ui.progress.error .bar {
   background-color: #DB2828 !important;
 }
-.ui.progress.error .bar,
-.ui.progress.error .bar::after {
+.snapW-ui.progress.error .bar,
+.snapW-ui.progress.error .bar::after {
           animation: none !important;
 }
-.ui.progress.error > .label {
+.snapW-ui.progress.error > .label {
   color: #912D2B;
 }
 
@@ -203,11 +203,11 @@
      Active
 ---------------*/
 
-.ui.active.progress .bar {
+.snapW-ui.active.progress .bar {
   position: relative;
   min-width: 2em;
 }
-.ui.active.progress .bar::after {
+.snapW-ui.active.progress .bar::after {
   content: '';
   opacity: 0;
   position: absolute;
@@ -243,11 +243,11 @@
     Disabled
 ---------------*/
 
-.ui.disabled.progress {
+.snapW-ui.disabled.progress {
   opacity: 0.35;
 }
-.ui.disabled.progress .bar,
-.ui.disabled.progress .bar::after {
+.snapW-ui.disabled.progress .bar,
+.snapW-ui.disabled.progress .bar::after {
           animation: none !important;
 }
 
@@ -257,12 +257,12 @@
 *******************************/
 
 /* top attached */
-.ui.progress.top.attached,
-.ui.progress.top.attached .bar {
+.snapW-ui.progress.top.attached,
+.snapW-ui.progress.top.attached .bar {
   top: 0px;
   border-radius: 0.28571429rem 0.28571429rem 0em 0em;
 }
-.ui.progress.top.attached .bar {
+.snapW-ui.progress.top.attached .bar {
   border-radius: 0em;
 }
 
@@ -270,34 +270,34 @@
      Colors
 ---------------*/
 /* Red */
-.ui.red.progress .bar {
+.snapW-ui.red.progress .bar {
   background-color: #DB2828;
 }
-.ui.red.inverted.progress .bar {
+.snapW-ui.red.inverted.progress .bar {
   background-color: #FF695E;
 }
 
 /* Orange */
-.ui.orange.progress .bar {
+.snapW-ui.orange.progress .bar {
   background-color: #F2711C;
 }
-.ui.orange.inverted.progress .bar {
+.snapW-ui.orange.inverted.progress .bar {
   background-color: #FF851B;
 }
 
 /* Yellow */
-.ui.yellow.progress .bar {
+.snapW-ui.yellow.progress .bar {
   background-color: #FBBD08;
 }
-.ui.yellow.inverted.progress .bar {
+.snapW-ui.yellow.inverted.progress .bar {
   background-color: #FFE21F;
 }
 
 /* Green */
-.ui.green.progress .bar {
+.snapW-ui.green.progress .bar {
   background-color: #21BA45;
 }
-.ui.green.inverted.progress .bar {
+.snapW-ui.green.inverted.progress .bar {
   background-color: #2ECC40;
 }
 
@@ -305,9 +305,9 @@
      Sizes
 ---------------*/
 
-.ui.tiny.progress {
+.snapW-ui.tiny.progress {
   font-size: 0.85714286rem;
 }
-.ui.tiny.progress .bar {
+.snapW-ui.tiny.progress .bar {
   height: 0.5em;
 }
