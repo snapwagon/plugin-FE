@@ -103,7 +103,7 @@ class AccountInfoContainer extends React.Component {
 
         <div className="snapW-form-flex-group">
           <div className={`${this.state.nameError ? 'error' : ''} field snapW-input-third`}>
-            <label htmlFor="form-input-control-full-name">Name</label>
+            <label htmlFor="form-input-control-full-name">Full Name</label>
             <input id="form-input-control-full-name" label="Name" placeholder="Name" name="name" value={this.props.name} className="snapW-ui input" onChange={this.handleInputChange} required />
           </div>
           <div className={`${this.state.emailError ? 'error' : ''} field snapW-input-third`}>
