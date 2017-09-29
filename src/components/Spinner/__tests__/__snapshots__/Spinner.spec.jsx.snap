@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Spinner /> snapshots rendered as a small <Spinner /> 1`] = `
+<i
+  className="pom-Spinner"
+  style={
+    Object {
+      "borderBottom": "3px solid transparent",
+      "borderLeft": "3px solid transparent",
+      "borderRight": "3px solid",
+      "borderTop": "3px solid",
+      "height": "20px",
+      "width": "20px",
+    }
+  }
+/>
+`;
+
+exports[`<Spinner /> snapshots renderered as a large <Spinner /> 1`] = `
+<i
+  className="pom-Spinner"
+  style={
+    Object {
+      "borderBottom": "12px solid transparent",
+      "borderLeft": "12px solid transparent",
+      "borderRight": "12px solid",
+      "borderTop": "12px solid",
+      "height": "100px",
+      "width": "100px",
+    }
+  }
+/>
+`;

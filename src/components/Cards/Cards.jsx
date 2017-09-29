@@ -97,7 +97,7 @@ class Cards extends React.Component {
           <Button
             onClick={this.handleInterest}
             size="small"
-            text={`Buy Now`}
+            text={'Buy Now'}
             classNames="snapW-Button--cookie_rush"
           />
         </Section>

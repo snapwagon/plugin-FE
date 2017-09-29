@@ -10,20 +10,32 @@ const {
 } = PropTypes;
 
 export default {
-  isDisabled: bool,
-  isLoading: bool,
-  color: oneOf([
-    'blue',
-    'orange',
-    'red',
-    'white'
+  buttonType: oneOf([
+    'filled',
+    'outline'
   ]),
   classNames: oneOfType([
     string,
     objectOf(bool)
   ]),
+  color: oneOf([
+    'blue',
+    'green',
+    'red',
+    'gray'
+  ]),
+  data: objectOf(string),
+  htmlType: oneOf([
+    'submit',
+    'reset',
+    'button'
+  ]),
+  id: string,
+  isDisabled: bool,
+  isLoading: bool,
   onClick: func,
-  text: string,
+  onHover: func,
+  showLoadingText: bool,
   size: oneOf([
     'card',
     'small',
@@ -31,21 +43,21 @@ export default {
     'large',
     'full'
   ]),
-  type: oneOf([
-    'normal',
-    'outline'
-  ]),
-  customStyle: string
+  text: string
 };
 
 export const defaultProps = {
-  color: 'blue',
+  buttonType: 'filled',
   classNames: undefined,
+  color: 'blue',
+  data: null,
+  htmlType: 'button',
+  id: null,
   isDisabled: false,
   isLoading: false,
   onClick() {},
-  size: 'small',
-  text: 'View Offer',
-  type: 'normal',
-  customStyle: undefined
+  onHover() {},
+  showLoadingText: false,
+  size: 'medium',
+  text: 'Click'
 };

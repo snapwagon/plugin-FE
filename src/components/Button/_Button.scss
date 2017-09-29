@@ -29,7 +29,7 @@
   z-index: 801;
 }
 
-.snapW-Button--is-disabled {
+.snapW-Button--disabled {
   cursor: initial;
 }
 
@@ -55,6 +55,10 @@
   background-color: #21BA45;
   color: #FFF;
   border: 1px solid #21BA45;
+}
+
+.snapW-Button--positive.snapW-Button--disabled {
+  background-color: #68CA90;
 }
 
 .snapW-Button--cookie_rush {

@@ -79,7 +79,7 @@ $makeDirectories
         .catch(console.warn)
     });
 
-    const $cssIndex = writeFile(pathToComponentCSS, `.rebounderz-${name} {
+    const $cssIndex = writeFile(pathToComponentCSS, `.snapW-${name} {
       margin: 0;
     }`, 'utf-8');
 

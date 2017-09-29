@@ -31,21 +31,24 @@ class PaymentForm extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.saving = false;
+    this.state = {
+      saving: false
+    };
   }
 
   handleSubmit(ev) {
     ev.preventDefault();
-    this.saving = true;
-    this.props.toggleIsLoading();
+    this.setState({saving: true});
+    // this.props.toggleIsLoading();
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
+    // https://stripe.com/docs/stripe.js#stripe-create-token
     this.props.stripe.createToken().then(({token, error}) => {
-      this.saving = false;
-      this.props.toggleIsLoading();
+      // this.props.toggleIsLoading();
       if (token) {
         this.props.handleValidate(token);
       } else {
+        this.setState({saving: false});
         this.props.handleErrorMessage(error.message);
       }
     });
@@ -93,7 +96,7 @@ class PaymentForm extends React.Component {
             text="Purchase"
             size="small"
             onClick={this.handleSubmit}
-            isLoading={this.props.isLoading}
+            isDisabled={this.state.saving}
             classNames="snapW-Button--positive"
           />
         </div>

@@ -5,6 +5,7 @@
 .snapW-ui.page.visible.dimmer {
   display: block;
   opacity: 0.7;
+  top: 0;
 }
 
 .snapW-ui.page.dimmer {
@@ -14,7 +15,6 @@
   width: 100%;
   z-index: 800;
   opacity: 0;
-  top: 0;
   transition: opacity 0.5s ease-out 0s;
   transform-style: '';
   transform-origin: center center;

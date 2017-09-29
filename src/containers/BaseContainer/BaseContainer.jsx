@@ -10,7 +10,7 @@ import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import Confirmation from '../../components/Confirmation/Confirmation';
 
-const STRIPE_PUB = "pk_live_HDp5l3vGgissfUpWLRUI8Gw5";
+const STRIPE_PUB = 'pk_live_HDp5l3vGgissfUpWLRUI8Gw5';
 
 class BaseContainer extends React.Component {
   constructor(props) {

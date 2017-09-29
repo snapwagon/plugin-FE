@@ -1,0 +1,13 @@
+.snapW-Spinner {
+  animation: rotate 1.5s infinite linear;
+  border-radius: 100%;
+  padding: 2px;
+  position: absolute;
+  margin-top: -2px;
+  margin-left: -2px;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}

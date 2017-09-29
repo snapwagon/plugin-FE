@@ -46,7 +46,7 @@ class PaymentContainer extends React.Component {
   }
 
   handleErrorMessage(e) {
-    this.setState({ message: e})
+    this.setState({ message: e});
   }
 
   handleValidate(token) {
