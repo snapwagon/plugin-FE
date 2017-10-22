@@ -43,7 +43,7 @@ class PaymentForm extends React.Component {
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
     // https://stripe.com/docs/stripe.js#stripe-create-token
-    this.props.stripe.createToken().then(({token, error}) => {
+    this.props.stripe.createToken({email: this.props.email}).then(({token, error}) => {
       // this.props.toggleIsLoading();
       if (token) {
         this.props.handleValidate(token);
@@ -117,7 +117,9 @@ PaymentForm.propTypes = {
   message: string,
   isLoading: string.isRequired,
   handleErrorMessage: func,
-  toggleIsLoading: func
+  toggleIsLoading: func,
+  customerName: string.isRequired,
+  email: string.isRequired
 };
 
 PaymentForm.defaultProps = {

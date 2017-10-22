@@ -63,7 +63,8 @@ class PaymentContainer extends React.Component {
         first_name: this.props.name,
         last_name: this.props.name,
         email: this.props.email,
-        phone_number: this.props.phone
+        phone_number: this.props.phone,
+        card_id: token.card.id
       },
       offer: {
         id: this.props.offerId
@@ -105,6 +106,8 @@ class PaymentContainer extends React.Component {
           message={this.state.message}
           toggleIsLoading={this.handleToggleIsLoading}
           handleErrorMessage={this.handleErrorMessage}
+          customerName={this.props.name}
+          email={this.props.email}
         />
       </Elements>
     );
