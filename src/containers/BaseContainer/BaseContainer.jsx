@@ -144,7 +144,7 @@ class BaseContainer extends React.Component {
       phone={this.state.phone}
       offerTitle={this.state.selectedOffer.title}
       offerAmount={this.state.selectedOffer.discounted_value}
-      offerDiscount={100-this.state.selectedOffer.discount_percentage}
+      offerDiscount={100 - this.state.selectedOffer.discount_percentage}
       offerFullValue={this.state.selectedOffer.value}
       offerId={this.state.selectedOffer.id}
       totalAmount={this.state.totalAmount}

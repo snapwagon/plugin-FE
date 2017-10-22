@@ -58,7 +58,7 @@ class Cards extends React.Component {
 
   render() {
     const savingsAmt = this.props.offer.value - this.props.offer.discounted_value;
-    const detailLine = `Discount: ${100-  this.props.offer.discount_percentage}% Value: $${this.props.offer.value}`;
+    const detailLine = `Discount: ${100 - this.props.offer.discount_percentage}% Value: $${this.props.offer.value}`;
 
     const markup = this.props.offer.desc;
     const sanitize = (htmlString) => {

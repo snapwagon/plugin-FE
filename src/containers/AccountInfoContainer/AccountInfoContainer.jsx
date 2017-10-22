@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import toMarkdown from 'to-markdown';
-import marked from 'marked';
 
 import { analytics } from '../../utils/utils';
 
